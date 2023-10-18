@@ -10,7 +10,7 @@ import java.util.List;
 
 @Controller
 public class GreetingController {
-    private List<Message> messageHistory = new ArrayList<>();
+    private final List<Message> messageHistory = new ArrayList<>();
 
 
     @MessageMapping("/hello")
