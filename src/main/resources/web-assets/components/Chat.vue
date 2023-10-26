@@ -1,15 +1,22 @@
-<template>
-  <h1>test</h1>
-</template>
+<script setup>
+import { ref } from 'vue';
+import Message from './Message.vue';
+import InputBox from './InputBox.vue';
 
-<script>
-export default {
-  name: "Chat"
+const messages = ref([]);
+
+function addMessage(messageBody) {
+    messages.value.push({
+        username: messageBody.username,
+        content: messageBody.content,
+    });
 }
 </script>
 
-<style lang="scss">
-h1 {
-  color: green;
-}
-</style>
+<template>
+    <div>
+        <Message v-for="msg in messages" :messageBody="msg" />
+    </div>
+
+    <InputBox @messageSent="addMessage" />
+</template>

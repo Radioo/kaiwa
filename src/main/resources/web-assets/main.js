@@ -1,8 +1,4 @@
-import {createApp} from "vue";
-import Chat from "./components/Chat.vue"
+import { createApp } from "vue";
+import Chat from "./components/Chat.vue";
 
-createApp({
-    components: {
-        Chat
-    }
-}).mount("#app");
+createApp(Chat).mount("#app");
