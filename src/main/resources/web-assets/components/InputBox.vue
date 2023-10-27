@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import filerWord from "../../js-modules/SwearFilter";
+import swearFilter from "../../js-modules/SwearFilter";
+
 const emit = defineEmits(["messageSent"])
 
 const username = ref("");
@@ -14,7 +17,7 @@ function sendMessage() {
 
     const messageBody = {
         username: username.value,
-        content: messageContent.value,
+        content: swearFilter(messageContent.value),
     }
 
     emit("messageSent", messageBody);
