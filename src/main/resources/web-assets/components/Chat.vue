@@ -1,3 +1,11 @@
+<template>
+  <div>
+    <Message v-for="msg in messages" :messageBody="msg" />
+  </div>
+
+  <InputBox @messageSent="addMessage" />
+</template>
+
 <script setup>
 import { ref } from 'vue';
 import Message from './Message.vue';
@@ -13,10 +21,7 @@ function addMessage(messageBody) {
 }
 </script>
 
-<template>
-    <div>
-        <Message v-for="msg in messages" :messageBody="msg" />
-    </div>
+<style lang="scss">
+@import "../scss/test";
 
-    <InputBox @messageSent="addMessage" />
-</template>
+</style>
