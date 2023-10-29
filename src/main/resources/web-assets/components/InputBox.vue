@@ -1,6 +1,15 @@
+<template>
+    <div class="input-box">
+        <form @submit.prevent="sendMessage">
+            <input v-model="username" placeholder="Username">
+            <input v-model="messageContent" placeholder="Write message..." class="msg-content-input">
+            <button>Wyślij</button>
+        </form>
+    </div>
+</template>
+
 <script setup>
 import { ref } from 'vue';
-import filerWord from "../../js-modules/SwearFilter";
 import swearFilter from "../../js-modules/SwearFilter";
 
 const emit = defineEmits(["messageSent"])
@@ -26,12 +35,13 @@ function sendMessage() {
 }
 </script>
 
-<template>
-    <div>
-        <form @submit.prevent="sendMessage">
-            <input v-model="username" placeholder="Użytkownik">
-            <input v-model="messageContent" placeholder="Napisz wiadomość...">
-            <button>Wyślij</button>
-        </form>
-    </div>
-</template>
+<style lang="scss">
+.input-box form {
+    display: flex;
+    width: 100%;
+
+    .msg-content-input {
+        flex-grow: 1;
+    }
+}
+</style>
