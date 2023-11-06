@@ -1,15 +1,26 @@
+<template>
+  <div class="chat-message">
+    <div>
+      <b>{{ props.messageBody.user }}</b>
+    </div>
+    <div>{{ props.messageBody.message }}</div>
+    <div>{{ props.messageBody.timestamp }}</div>
+  </div>
+</template>
+
 <script setup>
 const props = defineProps({
     messageBody: {
-        username: String,
-        content: String,
+        user: String,
+        message: String,
+        timestamp: String
     }
 });
 </script>
 
-<template>
-    <div>
-        <p><b>{{ props.messageBody.username }}</b></p>
-        <p>{{ props.messageBody.content }}</p>
-    </div>
-</template>
+<style lang="scss">
+.chat-message {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

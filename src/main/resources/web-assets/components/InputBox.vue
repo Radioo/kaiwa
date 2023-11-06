@@ -16,8 +16,9 @@ function sendMessage() {
     }
 
     const messageBody = {
-        username: username.value,
-        content: swearFilter(messageContent.value),
+        user: username.value,
+        message: swearFilter(messageContent.value),
+        timestamp: new Date().toLocaleString()
     }
 
     emit("messageSent", messageBody);
@@ -29,9 +30,9 @@ function sendMessage() {
 <template>
     <div>
         <form @submit.prevent="sendMessage">
-            <input v-model="username" placeholder="Użytkownik">
-            <input v-model="messageContent" placeholder="Napisz wiadomość...">
-            <button>Wyślij</button>
+            <input v-model="username" placeholder="User Name">
+            <input v-model="messageContent" placeholder="Message">
+            <button>Send</button>
         </form>
     </div>
 </template>
