@@ -1,5 +1,5 @@
 const swearFilter = (word) => {
-    const swearWords = ["fuck", "ass", "shit", "bitch", "cock", "dick", "cunt", "fag", "pussy", "slut", "retard", "whore", "nigg", "cip", "pizd", "chuj", "jeb", "pierd", "cwel", "pedał", "pedal", "dziwk", "kurw", "mend", "dup", "gówn", "choler"]
+    const swearWords = ["cunt", "fuck", "ass", "shit", "bitch", "cock", "dick", "cunt", "fag", "pussy", "slut", "retard", "whore", "nigg", "cip", "pizd", "chuj", "jeb", "pierd", "cwel", "pedał", "pedal", "dziwk", "kurw", "mend", "dup", "gówn", "choler"]
 
     for (let j in swearWords){
         let swear = swearWords[j]
