@@ -14,11 +14,19 @@ import {onMounted, ref} from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
+import {EventSourcePolyfill} from "ng-event-source";
 
 const messages = ref([]);
 
 onMounted(() => {
-  const evtSource = new EventSource("http://localhost:8080/sse");
+  const evtSource = new EventSourcePolyfill(
+      "http://localhost:8080/sse",
+      {
+        headers: {
+          "Cookie": document.cookie
+        }
+      }
+  );
 
   evtSource.onmessage = (event) => {
     const message = JSON.parse(event.data);
@@ -33,7 +41,8 @@ function addMessage(messageBody) {
     fetch("/send", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Cookie": document.cookie
       },
       body: JSON.stringify(messageBody)
     });
