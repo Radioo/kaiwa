@@ -1,4 +1,4 @@
 import { createApp } from "vue";
 import Chat from "./components/Chat.vue";
 
-createApp(Chat).mount("#app");
+createApp(Chat).mount("#chat");
