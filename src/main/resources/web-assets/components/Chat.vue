@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <Message v-for="msg in messages" :messageBody="msg" />
+  <Logo/>
+  <div class="chat-container">
+      <div class="message-container">
+          <Message v-for="msg in messages" :messageBody="msg" />
+      </div>
   </div>
 
   <InputBox @messageSent="addMessage" />
@@ -8,6 +11,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
+import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
 
@@ -37,6 +41,21 @@ function addMessage(messageBody) {
 </script>
 
 <style lang="scss">
-@import "../scss/test";
+@use "../scss/abstracts" as s;
+
+    .chat-container {
+        width: 60%;
+        height: 60vh;
+        margin: auto;
+        margin-bottom: 20px;
+        border-bottom: s.$base-border-radius solid s.$primary;
+        background-color: s.$chat;
+        overflow-y: scroll;
+        .message-container{
+            height: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
 
 </style>

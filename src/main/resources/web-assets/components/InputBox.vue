@@ -28,11 +28,47 @@ function sendMessage() {
 </script>
 
 <template>
-    <div>
-        <form @submit.prevent="sendMessage">
-            <input v-model="username" placeholder="User Name">
-            <input v-model="messageContent" placeholder="Message">
-            <button>Send</button>
+    <div class="input-container">
+        <form class="form-container" @submit.prevent="sendMessage">
+            <input class="user-input" v-model="username" placeholder="User Name">
+            <input class="message-input" v-model="messageContent" placeholder="Message">
+            <button class="send-button">Send</button>
         </form>
     </div>
 </template>
+
+<style lang="scss">
+@use '../scss/abstracts' as s;
+
+.input-container{
+  width: 60%;
+  margin: auto;
+
+  .form-container{
+    display: flex;
+    flex-direction: row;
+    height: 5rem;
+    gap: 10px;
+
+    .user-input, .send-button{
+      width: 15%;
+      font-size: s.$font-size-base;
+      margin: s.$base-margin 0 s.$base-margin;
+      padding: s.$base-padding;
+      border-radius: s.$base-border-radius;
+      border-width: s.$base-border-thickness;
+      background-color: s.$chat;
+    }
+    .message-input{
+      flex: 1.5;
+      font-size: s.$font-size-base;
+      margin: s.$base-margin 0 s.$base-margin;
+      padding: s.$base-padding;
+      border-radius: s.$base-border-radius;
+      border-width: s.$base-border-thickness;
+      background-color: s.$chat;
+    }
+  }
+}
+
+</style>
