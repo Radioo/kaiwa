@@ -51,10 +51,12 @@ function addMessage(messageBody) {
         border-bottom: s.$base-border-radius solid s.$primary;
         background-color: s.$chat;
         overflow-y: scroll;
+        animation: s.$fadeTransition;
         .message-container{
             height: 100%;
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
+            justify-content: flex-end;
         }
     }
 

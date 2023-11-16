@@ -43,6 +43,7 @@ function sendMessage() {
 .input-container{
   width: 60%;
   margin: auto;
+  animation: s.$fadeTransition;
 
   .form-container{
     display: flex;
