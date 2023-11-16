@@ -1,5 +1,5 @@
 const swearFilter = (word) => {
-    const swearWords = ["cunt", "fuck", "ass", "shit", "bitch", "cock", "dick", "cunt", "fag", "pussy", "slut", "retard", "whore", "nigg", "cip", "pizd", "chuj", "jeb", "pierd", "cwel", "pedał", "pedal", "dziwk", "kurw", "mend", "dup", "gówn", "choler"]
+    const swearWords = require('./data/swearWords.json').words
 
     for (let j in swearWords){
         let swear = swearWords[j]
