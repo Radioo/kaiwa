@@ -28,6 +28,7 @@ function logIn() {
     display: grid;
     grid-template-rows: repeat(3, 5em);
     row-gap: 10px;
+    animation: s.$fadeTransition;
 }
 
 .username-input, .password-input, .login-button {
@@ -37,5 +38,6 @@ function logIn() {
     border-radius: s.$base-border-radius;
     border-width: s.$base-border-thickness;
     background-color: s.$chat;
+  animation: s.$fadeTransition;
 }
 </style>
