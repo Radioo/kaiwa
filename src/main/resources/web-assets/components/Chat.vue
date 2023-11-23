@@ -14,8 +14,10 @@ import {onMounted, ref} from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
+import notify from "../../js-modules/notify";
 
 const messages = ref([]);
+let granted = false;
 
 onMounted(() => {
   const evtSource = new EventSource("http://localhost:8080/sse");
@@ -27,6 +29,15 @@ onMounted(() => {
 
     messages.value.push(message);
   }
+
+  (async () => {
+    if (Notification.permission === 'granted') {
+        granted = true;
+    } else if (Notification.permission !== 'denied') {
+        let permission = await Notification.requestPermission();
+        granted = permission === 'granted' ? true : false;
+    }
+  })();
 })
 
 function addMessage(messageBody) {
@@ -37,6 +48,8 @@ function addMessage(messageBody) {
       },
       body: JSON.stringify(messageBody)
     });
+
+    if(granted) notify(messageBody.user, messageBody.message);
 }
 </script>
 
