@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import filerWord from "../../js-modules/SwearFilter";
-import swearFilter from "../../js-modules/SwearFilter";
+import filerWord from "../js-modules/SwearFilter";
+import swearFilter from "../js-modules/SwearFilter";
 
 const emit = defineEmits(["messageSent"])
 
@@ -38,7 +38,7 @@ function sendMessage() {
 </template>
 
 <style lang="scss">
-@use '../scss/abstracts' as s;
+@use '../scss/abstracts/index' as s;
 
 .input-container{
   width: 60%;

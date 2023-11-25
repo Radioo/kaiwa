@@ -20,7 +20,7 @@ function logIn() {
 </script>
 
 <style lang="scss">
-@use '../scss/abstracts' as s;
+@use '../scss/abstracts/index' as s;
 
 .login-form {
     width: 33%;

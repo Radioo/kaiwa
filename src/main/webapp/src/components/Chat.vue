@@ -41,7 +41,7 @@ function addMessage(messageBody) {
 </script>
 
 <style lang="scss">
-@use "../scss/abstracts" as s;
+@use "../scss/abstracts/index" as s;
 
     .chat-container {
         width: 60%;

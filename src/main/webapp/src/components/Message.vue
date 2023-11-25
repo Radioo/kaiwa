@@ -20,7 +20,7 @@ const props = defineProps({
 
 <style lang="scss">
 @use '../scss/test';
-@use "../scss/abstracts" as s;
+@use "../scss/abstracts/index" as s;
 
 .chat-message {
   animation: s.$fadeTransition;
