@@ -20,18 +20,23 @@ const props = defineProps({
 
 <style lang="scss">
 @use '../scss/test';
+@use "../scss/abstracts/index" as s;
 
 .chat-message {
+  animation: s.$fadeTransition;
   display: flex;
   justify-content: space-between;
+  margin: 10px 0 0 10px;
   #message-user{
-      width: 19%;
+      margin-left: 10px;
+      width: 18%;
   }
   #message-timestamp{
     width: 14%;
   }
   #message-message{
-      flex: 1.5;
+      width: 68%;
+      overflow-wrap: break-word;
   }
 }
 </style>

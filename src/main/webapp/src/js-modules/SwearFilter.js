@@ -10,7 +10,7 @@ const swearFilter = (word) => {
             word = word.replace(new RegExp(swear, "ig"), censor)
         }
     }
-    return word.toUpperCase();
+    return word;
 }
 
 export default swearFilter;

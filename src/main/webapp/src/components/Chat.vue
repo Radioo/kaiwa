@@ -50,7 +50,7 @@ function addMessage(messageBody) {
 </script>
 
 <style lang="scss">
-@use "../scss/abstracts" as s;
+@use "../scss/abstracts/index" as s;
 
     .chat-container {
         width: 60%;
@@ -60,10 +60,12 @@ function addMessage(messageBody) {
         border-bottom: s.$base-border-radius solid s.$primary;
         background-color: s.$chat;
         overflow-y: scroll;
+        animation: s.$fadeTransition;
         .message-container{
             height: 100%;
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
+            justify-content: flex-end;
         }
     }
 
