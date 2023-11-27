@@ -4,9 +4,9 @@ import com.example.chat.model.Message;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @Controller
 public class RoutingController {
@@ -28,6 +28,12 @@ public class RoutingController {
         model.addAttribute("route", "chat");
 
         return "index";
+    }
+
+    @GetMapping("/username")
+    @ResponseBody
+    public String getUserName(Principal principal) {
+        return principal.getName();
     }
 
     @PostMapping("/send")

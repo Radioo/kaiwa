@@ -5,7 +5,10 @@ import swearFilter from "../js-modules/SwearFilter";
 
 const emit = defineEmits(["messageSent"])
 
-const username = ref("");
+const props = defineProps({
+  username: String
+})
+
 const messageContent = ref("");
 
 function sendMessage() {
@@ -16,7 +19,7 @@ function sendMessage() {
     }
 
     const messageBody = {
-        user: username.value,
+        user: props.username,
         message: swearFilter(messageContent.value),
         timestamp: new Date().toLocaleString()
     }
@@ -30,7 +33,6 @@ function sendMessage() {
 <template>
     <div class="input-container">
         <form class="form-container" @submit.prevent="sendMessage">
-            <input class="user-input" v-model="username" placeholder="User Name">
             <input class="message-input" v-model="messageContent" placeholder="Message">
             <button class="send-button">Send</button>
         </form>

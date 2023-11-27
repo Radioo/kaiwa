@@ -1,4 +1,5 @@
 <template>
+  <UserHeader :username="username"/>
   <Logo/>
   <div class="chat-container">
       <div class="message-container">
@@ -6,7 +7,7 @@
       </div>
   </div>
 
-  <InputBox @messageSent="addMessage" />
+  <InputBox @messageSent="addMessage" :username="username"/>
 </template>
 
 <script setup>
@@ -14,18 +15,14 @@ import {onMounted, ref} from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
-import {EventSourcePolyfill} from "ng-event-source";
+import UserHeader from "./UserHeader.vue";
 
+const username = ref("");
 const messages = ref([]);
 
 onMounted(() => {
-  const evtSource = new EventSourcePolyfill(
-      "http://localhost:8080/sse",
-      {
-        headers: {
-          "Cookie": document.cookie
-        }
-      }
+  const evtSource = new EventSource(
+      "http://localhost:8080/sse"
   );
 
   evtSource.onmessage = (event) => {
@@ -35,14 +32,17 @@ onMounted(() => {
 
     messages.value.push(message);
   }
+
+  fetch("/username")
+      .then(response => response.text())
+      .then(response => username.value = response);
 })
 
 function addMessage(messageBody) {
     fetch("/send", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Cookie": document.cookie
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(messageBody)
     });
