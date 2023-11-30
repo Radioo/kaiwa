@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import filerWord from "../../../../../../kaiwa-master/src/main/webapp/src/js-modules/SwearFilter";
-import swearFilter from "../../../../../../kaiwa-master/src/main/webapp/src/js-modules/SwearFilter";
+import filterWord from "../js-modules/SwearFilter";
+import swearFilter from "../js-modules/SwearFilter";
 
 const emit = defineEmits(["messageSent"])
 
