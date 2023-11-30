@@ -1,5 +1,5 @@
 <template>
-  <div class="logo"><img src="../Kaiwa.svg" alt="Logo"></div>
+  <div class="logo"><img src="../../static/images/Kaiwa.svg" alt="Logo"></div>
 </template>
 
 <script setup>
@@ -7,7 +7,7 @@
 </script>
 
 <style lang="scss">
-@use "../scss/abstracts" as s;
+@use "../scss/abstracts/index" as s;
 
     .logo{
         display: flex;

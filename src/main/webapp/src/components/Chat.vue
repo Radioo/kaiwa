@@ -1,4 +1,5 @@
 <template>
+  <UserHeader :username="username"/>
   <Logo/>
   <div class="chat-container">
       <div class="message-container">
@@ -6,7 +7,7 @@
       </div>
   </div>
 
-  <InputBox @messageSent="addMessage" />
+  <InputBox @messageSent="addMessage" :username="username"/>
 </template>
 
 <script setup>
@@ -14,13 +15,17 @@ import {onMounted, ref} from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
-import notify from "../../js-modules/notify";
+import UserHeader from "./UserHeader.vue";
+import notify from "../js-modules/notify";
 
+const username = ref("");
 const messages = ref([]);
 let granted = false;
 
 onMounted(() => {
-  const evtSource = new EventSource("http://localhost:8080/sse");
+  const evtSource = new EventSource(
+      "http://localhost:8080/sse"
+  );
 
   evtSource.onmessage = (event) => {
     const message = JSON.parse(event.data);
@@ -29,6 +34,10 @@ onMounted(() => {
 
     messages.value.push(message);
   }
+
+  fetch("/username")
+      .then(response => response.text())
+      .then(response => username.value = response);
 
   (async () => {
     if (Notification.permission === 'granted') {
@@ -54,7 +63,7 @@ function addMessage(messageBody) {
 </script>
 
 <style lang="scss">
-@use "../scss/abstracts" as s;
+@use "../scss/abstracts/index" as s;
 
     .chat-container {
         width: 60%;
