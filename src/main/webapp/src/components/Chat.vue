@@ -20,20 +20,14 @@ import notify from "../js-modules/notify";
 
 const username = ref("");
 const messages = ref([]);
-let granted = false;
+let isNotified = false;
+let isFocused = true;
+let messagesAmount = 0;
 
 onMounted(() => {
   const evtSource = new EventSource(
       "http://localhost:8080/sse"
   );
-
-  evtSource.onmessage = (event) => {
-    const message = JSON.parse(event.data);
-
-    console.log(message);
-
-    messages.value.push(message);
-  }
 
   fetch("/username")
       .then(response => response.text())
@@ -41,12 +35,29 @@ onMounted(() => {
 
   (async () => {
     if (Notification.permission === 'granted') {
-        granted = true;
+        isNotified = true;
     } else if (Notification.permission !== 'denied') {
         let permission = await Notification.requestPermission();
-        granted = permission === 'granted' ? true : false;
+        isNotified = permission === 'isNotified' ? true : false;
     }
   })();
+
+  window.addEventListener("focus", () => {isFocused = true;});
+  window.addEventListener("blur", () => {isFocused = false;});
+
+  evtSource.onmessage = (event) => {
+    const message = JSON.parse(event.data);
+
+    console.log(message);
+
+    messages.value.push(message);
+
+    if (!isFocused && messages.value.length != messagesAmount) {
+        messagesAmount = messages.value.length;
+        if(isNotified && message.user != username.value) 
+          notify(message.user, message.message);
+    }
+  }
 })
 
 function addMessage(messageBody) {
@@ -57,8 +68,6 @@ function addMessage(messageBody) {
       },
       body: JSON.stringify(messageBody)
     });
-
-    if(granted) notify(messageBody.user, messageBody.message);
 }
 </script>
 
