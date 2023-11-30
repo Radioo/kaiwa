@@ -18,13 +18,7 @@ function sendMessage() {
         return;
     }
 
-    const messageBody = {
-        user: props.username,
-        message: swearFilter(messageContent.value),
-        timestamp: new Date().toLocaleString()
-    }
-
-    emit("messageSent", messageBody);
+    emit("messageSent", swearFilter(messageContent.value));
 
     messageContent.value = "";
 }

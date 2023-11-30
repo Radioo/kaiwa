@@ -38,6 +38,8 @@ onMounted(() => {
   const evtSource = new EventSource("/sse");
 
   evtSource.onmessage = (event) => {
+    console.log(event);
+
     const message = JSON.parse(event.data);
 
     console.log(message);
@@ -58,9 +60,9 @@ function addMessage(messageBody) {
   fetch("/send", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "text/plain"
     },
-    body: JSON.stringify(messageBody)
+    body: messageBody
   });
 }
 </script>
