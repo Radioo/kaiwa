@@ -1,5 +1,5 @@
 <template>
-  <div class="logo"><img src="../../../../../../kaiwa-master/src/main/webapp/static/images/Kaiwa.svg" alt="Logo"></div>
+  <div class="logo"><img src="../../static/images/Kaiwa.svg" alt="Logo"></div>
 </template>
 
 <script setup>
