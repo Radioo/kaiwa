@@ -2,6 +2,11 @@
 
 body{
   margin: 0;
-  background: linear-gradient(112deg, rgb(217, 201, 189) 0%, rgb(235, 220, 205) 49%, rgb(248, 233, 218) 100%);
+  color: var(--font-color)
+}
+
+#chat{
+  margin: 0;
+  background: linear-gradient(120deg, var(--primary), var(--secondary-grad));
   height: 100vh;
 }
