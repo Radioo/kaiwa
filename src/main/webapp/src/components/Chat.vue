@@ -1,7 +1,7 @@
 <template>
   <Logo/>
   <ToggleButton/>
-  <Menu/>
+  <Menu :username="username"/>
   <div class="chat-container">
     <div class="message-container">
       <Message v-for="msg in messages" :messageBody="msg" />
