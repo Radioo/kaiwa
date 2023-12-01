@@ -32,6 +32,7 @@ window.addEventListener("blur", async () => {
 window.addEventListener("focus", async () => {
   isFocused = true;
   unreadMessages.value = 0;
+  updateDocumentTitle();
 });
 
 onMounted(() => {
@@ -48,6 +49,7 @@ onMounted(() => {
 
     if (!isFocused) {
       unreadMessages.value += 1;
+      updateDocumentTitle();
     }
   };
 
@@ -55,6 +57,10 @@ onMounted(() => {
     .then(response => response.text())
     .then(response => username.value = response);
 });
+
+function updateDocumentTitle () {
+  document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
+}
 
 function addMessage(messageBody) {
   fetch("/send", {
