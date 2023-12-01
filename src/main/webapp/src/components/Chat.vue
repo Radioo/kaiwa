@@ -1,5 +1,4 @@
 <template>
-  <UserHeader :username="username"/>
   <Logo/>
   <ToggleButton/>
   <Menu :username="username"/>
@@ -30,8 +29,6 @@ let messagesAmount = 0;
 
 const unreadMessages = ref(0);
 document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
-
-let isFocused = true;
 
 window.addEventListener("blur", async () => {
   isFocused = false;
@@ -75,6 +72,12 @@ onMounted(() => {
       unreadMessages.value += 1;
       updateDocumentTitle();
     }
+
+    if (!isFocused && messages.value.length != messagesAmount) {
+      messagesAmount = messages.value.length;
+      if(isNotified && message.user != username.value)
+        notify(message.user, message.text);
+    }
   };
 
   fetch("/username")
@@ -85,14 +88,6 @@ onMounted(() => {
 function updateDocumentTitle () {
   document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
 }
-
-    if (!isFocused && messages.value.length != messagesAmount) {
-        messagesAmount = messages.value.length;
-        if(isNotified && message.user != username.value)
-          notify(message.user, message.message);
-    }
-  }
-})
 
 function addMessage(messageBody) {
   fetch("/send", {

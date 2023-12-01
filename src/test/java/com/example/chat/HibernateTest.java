@@ -15,7 +15,8 @@ public class HibernateTest {
 
     @Test
     public void addUser() {
-        userRepository.save(new User("admin", (new BCryptPasswordEncoder()).encode("hunter2")));
+//        userRepository.save(new User("admin", (new BCryptPasswordEncoder()).encode("hunter2")));
+        userRepository.save(new User("admin2", (new BCryptPasswordEncoder()).encode("a")));
 
         User user = userRepository.findByName("admin");
         assert user != null;
