@@ -3,8 +3,8 @@
     <div id="message-user">
       <b>{{ props.messageBody.user }}</b>
     </div>
-    <div id="message-message">{{ props.messageBody.message }}</div>
-    <div id="message-timestamp">{{ props.messageBody.timestamp }}</div>
+    <div id="message-message">{{ props.messageBody.text }}</div>
+    <div id="message-timestamp">{{ props.messageBody.date }}</div>
   </div>
 </template>
 
@@ -12,18 +12,18 @@
 const props = defineProps({
     messageBody: {
         user: String,
-        message: String,
-        timestamp: String
+        text: String,
+        date: String
     }
 });
 </script>
 
 <style lang="scss">
-@use '../scss/test';
-@use "../scss/abstracts/index" as s;
+//@use "../scss/test;
+@use "../scss/abstracts/index" as *;
 
 .chat-message {
-  animation: s.$fadeTransition;
+  animation: $fadeTransition;
   display: flex;
   justify-content: space-between;
   margin: 10px 0 0 10px;

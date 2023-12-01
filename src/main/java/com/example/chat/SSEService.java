@@ -1,6 +1,7 @@
 package com.example.chat;
 
 import com.example.chat.model.Message;
+import com.example.chat.model.MessageResponse;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -30,7 +31,7 @@ public class SSEService {
         }
     }
 
-    public void sendMessage(Message message) {
+    public void sendMessage(MessageResponse message) {
         for (SseEmitter emitter : emitters) {
             try {
                 emitter.send(message);

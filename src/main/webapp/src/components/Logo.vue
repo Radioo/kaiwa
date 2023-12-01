@@ -7,7 +7,7 @@
 </script>
 
 <style lang="scss">
-@use "../scss/abstracts/index" as s;
+@use "../scss/abstracts/index" as *;
 
     .logo{
         display: flex;
@@ -15,9 +15,9 @@
         align-items: center;
         width: 60%;
         margin: auto;
-        animation: s.$fadeTransition;
+        animation: $fadeTransition;
         img{
-            max-width: 20%;
+            width: 20%;
             height: auto;
         }
     }
