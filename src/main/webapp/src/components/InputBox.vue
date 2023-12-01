@@ -30,7 +30,6 @@ function sendMessage() {
 <template>
     <div class="input-container">
         <form class="form-container" @submit.prevent="sendMessage">
-            <input class="user-input" v-model="username" placeholder="User Name">
             <input class="message-input" v-model="messageContent" placeholder="Message">
             <button class="send-button">Send</button>
         </form>

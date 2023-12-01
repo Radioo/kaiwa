@@ -1,10 +1,10 @@
 <template>
-    <Logo />
-    <form class="login-form" @submit.prevent="logIn">
-        <input v-model="username" type="text" class="username-input" required placeholder="Username">
-        <input v-model="password" type="password" class="password-input" required placeholder="Password">
-        <button class="login-button">Login</button>
-    </form>
+  <Logo />
+  <form class="login-form" method="post">
+    <input type="text" name="username" class="username-input" required placeholder="Username">
+    <input type="password" name="password" class="password-input" required placeholder="Password">
+    <input type="submit" value="Sign In" class="login-button">
+  </form>
 </template>
 
 <script setup>
