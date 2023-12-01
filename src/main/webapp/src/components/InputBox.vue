@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import filerWord from "../js-modules/SwearFilter";
+import filterWord from "../js-modules/SwearFilter";
 import swearFilter from "../js-modules/SwearFilter";
 
 const emit = defineEmits(["messageSent"])
@@ -34,12 +34,21 @@ function sendMessage() {
 </template>
 
 <style lang="scss">
-@use '../scss/abstracts/index' as s;
+@use "../scss/abstracts/index" as *;
+@mixin inputstuff{
+  font-size: $font-size-base;
+  margin: $base-margin 0 $base-margin;
+  padding: $base-padding;
+  border-radius: $base-border-radius;
+  border-width: $base-border-thickness;
+  background-color: var(--chat);
+  color: var(--font-color);
+}
 
 .input-container{
   width: 60%;
   margin: auto;
-  animation: s.$fadeTransition;
+  animation: $fadeTransition;
 
   .form-container{
     display: flex;
@@ -48,22 +57,12 @@ function sendMessage() {
     gap: 10px;
 
     .user-input, .send-button{
+      @include inputstuff;
       width: 15%;
-      font-size: s.$font-size-base;
-      margin: s.$base-margin 0 s.$base-margin;
-      padding: s.$base-padding;
-      border-radius: s.$base-border-radius;
-      border-width: s.$base-border-thickness;
-      background-color: s.$chat;
     }
     .message-input{
+      @include inputstuff;
       flex: 1.5;
-      font-size: s.$font-size-base;
-      margin: s.$base-margin 0 s.$base-margin;
-      padding: s.$base-padding;
-      border-radius: s.$base-border-radius;
-      border-width: s.$base-border-thickness;
-      background-color: s.$chat;
     }
   }
 }

@@ -1,2 +1,22 @@
-$primary: rgb(217,201,189);
-$chat: #FAF0EB;
+//$primary: rgb(217,201,189);
+//$chat: #a2603e;
+$change: 15%;
+
+[data-theme="light"] {
+  --primary: rgb(217,201,189);
+  --secondary-grad: rgb(248, 233, 218);
+  --chat: #FAF0EB;
+  --bg-color1: #f4f4f4;
+  --font-color: #121416;
+  --button: #FFD6BA;
+  --button-hover: rgb(237,221,209);
+}
+
+[data-theme="dark"] {
+  --primary: rgb(84, 67, 59);
+  --secondary-grad: rgb(35, 49, 63);
+  --chat: #1f1e1d;
+  --bg-color1: #121416;
+  --font-color: #f4f4f4;
+  --button-hover: rgb(104, 87, 79);
+}

@@ -19,11 +19,11 @@ const props = defineProps({
 </script>
 
 <style lang="scss">
-@use '../scss/test';
-@use "../scss/abstracts/index" as s;
+//@use "../scss/test;
+@use "../scss/abstracts/index" as *;
 
 .chat-message {
-  animation: s.$fadeTransition;
+  animation: $fadeTransition;
   display: flex;
   justify-content: space-between;
   margin: 10px 0 0 10px;
