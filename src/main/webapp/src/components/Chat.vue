@@ -2,9 +2,10 @@
   <Logo/>
   <ToggleButton/>
   <Menu :username="username"/>
-  <div class="chat-container">
-    <div class="message-container">
+  <div class="chat-container" ref="chatContainer">
+    <div class="message-container" >
       <Message v-for="msg in messages" :messageBody="msg" />
+      <div id="scroll-anchor"></div>
     </div>
   </div>
 
@@ -23,6 +24,7 @@ import notify from "../js-modules/notify";
 
 const username = ref("");
 const messages = ref([]);
+const chatContainer = ref(null);
 let isNotified = false;
 let isFocused = true;
 let messagesAmount = 0;
@@ -83,7 +85,13 @@ onMounted(() => {
   fetch("/username")
     .then(response => response.text())
     .then(response => username.value = response);
+
+  forceScrollToBottom();
 });
+
+function forceScrollToBottom() {
+  chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+}
 
 function updateDocumentTitle () {
   document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
@@ -97,6 +105,8 @@ function addMessage(messageBody) {
     },
     body: messageBody
   });
+  
+  forceScrollToBottom();
 }
 
 </script>
@@ -118,7 +128,18 @@ function addMessage(messageBody) {
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            // justify-content: flex-end;
+            > :first-child {
+                margin-top: auto !important;
+            }
+            * {
+                overflow-anchor: none;
+            }
+            #scroll-anchor {
+                overflow-anchor: auto;
+                height: 1px;
+                flex-shrink: 0;
+            }
         }
     }
 
