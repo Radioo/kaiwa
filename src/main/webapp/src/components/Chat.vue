@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
@@ -28,19 +28,7 @@ const chatContainer = ref(null);
 let isNotified = false;
 let isFocused = true;
 let messagesAmount = 0;
-
 const unreadMessages = ref(0);
-document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
-
-window.addEventListener("blur", async () => {
-  isFocused = false;
-});
-
-window.addEventListener("focus", async () => {
-  isFocused = true;
-  unreadMessages.value = 0;
-  updateDocumentTitle();
-});
 
 onMounted(() => {
   const evtSource = new EventSource("/sse");
@@ -58,8 +46,14 @@ onMounted(() => {
     }
   })();
 
-  window.addEventListener("focus", () => {isFocused = true;});
-  window.addEventListener("blur", () => {isFocused = false;});
+  window.addEventListener("blur", async () => {
+    isFocused = false;
+  });
+
+  window.addEventListener("focus", async () => {
+    isFocused = true;
+    unreadMessages.value = 0;
+  });
 
   evtSource.onmessage = (event) => {
     console.log(event);
@@ -72,7 +66,6 @@ onMounted(() => {
 
     if (!isFocused) {
       unreadMessages.value += 1;
-      updateDocumentTitle();
     }
 
     if (!isFocused && messages.value.length != messagesAmount) {
@@ -93,10 +86,6 @@ function forceScrollToBottom() {
   chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
 }
 
-function updateDocumentTitle () {
-  document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
-}
-
 function addMessage(messageBody) {
   fetch("/send", {
     method: "POST",
@@ -108,6 +97,10 @@ function addMessage(messageBody) {
   
   forceScrollToBottom();
 }
+
+watch(unreadMessages, () => {
+  document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
+});
 
 </script>
 
