@@ -37,6 +37,11 @@ onMounted(() => {
       .then(response => response.text())
       .then(response => username.value = response);
 
+  fetch("/history")
+    .then((response) => response.json())
+    .then((json) => messages.value.push(...json.reverse()))
+    .then(() => forceScrollToBottom());
+
   (async () => {
     if (Notification.permission === 'granted') {
         isNotified = true;
