@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(
                                 mvc.pattern("/"),
+                                mvc.pattern("/register"),
                                 mvc.pattern("/js/app.js"),
                                 mvc.pattern("/images/**"),
                                 mvc.pattern("/h2-ui")).permitAll()
