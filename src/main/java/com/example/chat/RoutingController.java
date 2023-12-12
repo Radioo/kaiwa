@@ -2,10 +2,12 @@ package com.example.chat;
 
 import com.example.chat.model.Message;
 import com.example.chat.model.MessageResponse;
+import com.example.chat.model.RegisterForm;
 import com.example.chat.model.User;
 import com.example.chat.repository.MessageRepository;
 import com.example.chat.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,8 @@ import java.util.stream.Collectors;
 @Controller
 public class RoutingController {
     private final SSEService service;
-    private MessageRepository messageRepository;
-    private UserRepository userRepository;
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
 
     public RoutingController(SSEService service, MessageRepository messageRepository, UserRepository userRepository) {
         this.service = service;
@@ -45,6 +47,19 @@ public class RoutingController {
     @ResponseBody
     public String getUserName(Principal principal) {
         return principal.getName();
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Void> registerUser(@RequestBody RegisterForm form) {
+        User existing = userRepository.findByName(form.getName());
+        if(existing != null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        User user = new User(form.getName(), new BCryptPasswordEncoder().encode(form.getPassword()));
+        userRepository.save(user);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/send")

@@ -2,9 +2,10 @@
   <Logo/>
   <ToggleButton/>
   <Menu :username="username"/>
-  <div class="chat-container">
-    <div class="message-container">
+  <div class="chat-container" ref="chatContainer">
+    <div class="message-container" >
       <Message v-for="msg in messages" :messageBody="msg" />
+      <div id="scroll-anchor"></div>
     </div>
   </div>
 
@@ -12,7 +13,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
@@ -23,22 +24,11 @@ import notify from "../js-modules/notify";
 
 const username = ref("");
 const messages = ref([]);
+const chatContainer = ref(null);
 let isNotified = false;
 let isFocused = true;
 let messagesAmount = 0;
-
 const unreadMessages = ref(0);
-document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
-
-window.addEventListener("blur", async () => {
-  isFocused = false;
-});
-
-window.addEventListener("focus", async () => {
-  isFocused = true;
-  unreadMessages.value = 0;
-  updateDocumentTitle();
-});
 
 onMounted(() => {
   const evtSource = new EventSource("/sse");
@@ -46,6 +36,11 @@ onMounted(() => {
   fetch("/username")
       .then(response => response.text())
       .then(response => username.value = response);
+
+  fetch("/history")
+    .then((response) => response.json())
+    .then((json) => messages.value.push(...json.reverse()))
+    .then(() => forceScrollToBottom());
 
   (async () => {
     if (Notification.permission === 'granted') {
@@ -56,8 +51,14 @@ onMounted(() => {
     }
   })();
 
-  window.addEventListener("focus", () => {isFocused = true;});
-  window.addEventListener("blur", () => {isFocused = false;});
+  window.addEventListener("blur", async () => {
+    isFocused = false;
+  });
+
+  window.addEventListener("focus", async () => {
+    isFocused = true;
+    unreadMessages.value = 0;
+  });
 
   evtSource.onmessage = (event) => {
     console.log(event);
@@ -70,7 +71,6 @@ onMounted(() => {
 
     if (!isFocused) {
       unreadMessages.value += 1;
-      updateDocumentTitle();
     }
 
     if (!isFocused && messages.value.length != messagesAmount) {
@@ -83,10 +83,12 @@ onMounted(() => {
   fetch("/username")
     .then(response => response.text())
     .then(response => username.value = response);
+
+  forceScrollToBottom();
 });
 
-function updateDocumentTitle () {
-  document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
+function forceScrollToBottom() {
+  chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
 }
 
 function addMessage(messageBody) {
@@ -97,7 +99,13 @@ function addMessage(messageBody) {
     },
     body: messageBody
   });
+  
+  forceScrollToBottom();
 }
+
+watch(unreadMessages, () => {
+  document.title = (unreadMessages.value === 0 ? "" : `(${unreadMessages.value}) `) + "Kaiwa";
+});
 
 </script>
 
@@ -118,7 +126,18 @@ function addMessage(messageBody) {
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            // justify-content: flex-end;
+            > :first-child {
+                margin-top: auto !important;
+            }
+            * {
+                overflow-anchor: none;
+            }
+            #scroll-anchor {
+                overflow-anchor: auto;
+                height: 1px;
+                flex-shrink: 0;
+            }
         }
     }
 
