@@ -1,9 +1,9 @@
 <template>
   <h2>Create an account</h2>
   <form class="signup-form" @submit.prevent="signUp">
-    <input type="text" name="name" v-model.trim="username" class="username-input" required placeholder="Username">
-    <input type="password" name="password" v-model="password" class="password-input" required placeholder="Password">
-    <input type="password" v-model="passwordConfirm" class="password-input-confirm" required
+    <input type="text" name="name" v-model.trim="username" class="username-input" placeholder="Username">
+    <input type="password" name="password" v-model="password" class="password-input" placeholder="Password">
+    <input type="password" v-model="passwordConfirm" class="password-input-confirm"
       placeholder="Confirm password">
     <input type="submit" value="Sign Up" class="signup-button">
   </form>
@@ -91,11 +91,8 @@ h2 {
   display: grid;
   grid-template-rows: repeat(4, 5em);
   row-gap: 10px;
-  animation: $fadeTransition;
-
   input {
     @include inputstuff;
-    animation: $fadeTransition;
   }
 }
 

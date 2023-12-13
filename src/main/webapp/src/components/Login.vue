@@ -1,12 +1,12 @@
 <template>
   <Logo />
-  <div v-if="register">
+  <div class="login" v-if="register">
     <Signup/>
     <p>
       Already have an account? <a href="register" @click.prevent="register = false">Sign in</a>
     </p>
   </div>
-  <div v-else>
+  <div class="register" v-else>
     <LoginForm/>
     <p>
       Need an account? <a href="register" @click.prevent="register = true">Sign up here</a>
@@ -30,5 +30,9 @@ const register = ref(false);
 
 p {
   text-align: center;
+}
+
+.login, .register {
+  animation: $fadeTransition;
 }
 </style>
