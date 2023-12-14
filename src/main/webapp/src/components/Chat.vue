@@ -29,7 +29,8 @@ let isNotified = false;
 let isFocused = true;
 let messagesAmount = 0;
 const unreadMessages = ref(0);
-const selectedAnim = ref('fade-in-anim');
+const savedSettings = JSON.parse(localStorage.getItem('animationSettings'));
+const selectedAnim = ref(savedSettings?.selectedAnim || 'slide-in-anim');
 
 onMounted(() => {
   const evtSource = new EventSource("/sse");
@@ -88,6 +89,9 @@ onMounted(() => {
   forceScrollToBottom();
 });
 const updateSelectedAnim = (option) => {
+  console.log('Saving animation option:', option);
+  const settingsToSave = { selectedAnim: option };
+  localStorage.setItem('animationSettings', JSON.stringify(settingsToSave));
   selectedAnim.value = option;
 };
 

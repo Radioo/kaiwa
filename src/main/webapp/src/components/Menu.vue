@@ -21,11 +21,11 @@
     <h2>Settings</h2>
     <h3>Message appearance animation</h3>
     <div class="radio">
-      <input v-model="selectedOption" class="radio__input" type="radio" value="fade-in-anim" name="myRadio" id="myRadio1" @change="emitOptionChange">
+      <input v-model="selectedAnim" class="radio__input" type="radio" value="fade-in-anim" name="myRadio" id="myRadio1" @change="emitOptionChange">
       <label class="radio__label" for="myRadio1">Fade in</label>
-      <input v-model="selectedOption" class="radio__input" type="radio" value="slide-in-anim" name="myRadio" id="myRadio2" @change="emitOptionChange">
+      <input v-model="selectedAnim" class="radio__input" type="radio" value="slide-in-anim" name="myRadio" id="myRadio2" @change="emitOptionChange">
       <label class="radio__label" for="myRadio2">Slide left</label>
-      <input v-model="selectedOption" class="radio__input" type="radio" value="reveal-in-anim" name="myRadio" id="myRadio3" @change="emitOptionChange">
+      <input v-model="selectedAnim" class="radio__input" type="radio" value="reveal-in-anim" name="myRadio" id="myRadio3" @change="emitOptionChange">
       <label class="radio__label" for="myRadio3">Slide up</label>
     </div>
   </div>
@@ -36,7 +36,10 @@
 
 import { ref } from 'vue';
 
-const selectedOption = ref("fade-in-anim");
+const selectedAnim = ref("fade-in-anim");
+const savedSettings = JSON.parse(localStorage.getItem('animationSettings')) || { selectedAnim: 'slide-in-anim' };
+console.log('Loaded animation settings:', savedSettings);
+selectedAnim.value = savedSettings.selectedAnim;
 
 const sidebarRef = ref(null);
 
@@ -60,7 +63,9 @@ const closePopup = () => {
 
 const emit = defineEmits(["optionChanged"])
 const emitOptionChange = () => {
-  emit('optionChanged', selectedOption.value);
+  const settingsToSave = { selectedAnim: selectedAnim.value };
+  localStorage.setItem('animationSettings', JSON.stringify(settingsToSave));
+  emit('optionChanged', selectedAnim.value);
 };
 
 </script>
