@@ -21,6 +21,7 @@ import ToggleButton from './ToggleButton.vue'
 import Menu from './Menu.vue'
 import UserHeader from "./UserHeader.vue";
 import notify from "../js-modules/notify";
+import transformWord from "../js-modules/transformWord";
 
 const username = ref("");
 const messages = ref([]);
@@ -39,7 +40,13 @@ onMounted(() => {
 
   fetch("/history")
     .then((response) => response.json())
-    .then((json) => messages.value.push(...json.reverse()))
+    .then((json) => {
+      const messagesJson = [...json.reverse()]
+      for (let i in messagesJson){
+        messagesJson[i].text = transformWord(messagesJson[i].text, i)
+        messages.value.push(messagesJson[i])
+      }
+    })
     .then(() => forceScrollToBottom());
 
   (async () => {
@@ -64,6 +71,7 @@ onMounted(() => {
     console.log(event);
 
     const message = JSON.parse(event.data);
+    message.text = transformWord(message.text, messages.value.length)
 
     console.log(message);
 
