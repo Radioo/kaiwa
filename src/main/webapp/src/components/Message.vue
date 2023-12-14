@@ -20,16 +20,19 @@ const props = defineProps({
 </script>
 
 <style lang="scss">
-//@use "../scss/test;
 @use "../scss/abstracts/index" as *;
 
 .chat-message {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0 0 10px;
+  align-items: center;
+  background-color: var(--chat-message);
+  margin: 0 30px 20px 30px;
+  padding: 10px;
+  border-radius: $base-border-radius;
   #message-user{
       margin-left: 10px;
-      width: 18%;
+      width: 14%;
   }
   #message-timestamp{
     width: 14%;
