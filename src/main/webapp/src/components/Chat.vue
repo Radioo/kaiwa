@@ -1,10 +1,10 @@
 <template>
   <Logo/>
   <ToggleButton/>
-  <Menu :username="username"/>
+  <Menu :username="username" @optionChanged="updateSelectedAnim"/>
   <div class="chat-container" ref="chatContainer">
     <div class="message-container" >
-      <Message v-for="msg in messages" :messageBody="msg" />
+      <Message v-for="msg in messages" :messageBody="msg" :animationClass="selectedAnim" />
       <div id="scroll-anchor"></div>
     </div>
   </div>
@@ -29,6 +29,8 @@ let isNotified = false;
 let isFocused = true;
 let messagesAmount = 0;
 const unreadMessages = ref(0);
+const savedSettings = JSON.parse(localStorage.getItem('animationSettings'));
+const selectedAnim = ref(savedSettings?.selectedAnim || 'slide-in-anim');
 
 onMounted(() => {
   const evtSource = new EventSource("/sse");
@@ -86,6 +88,12 @@ onMounted(() => {
 
   forceScrollToBottom();
 });
+const updateSelectedAnim = (option) => {
+  console.log('Saving animation option:', option);
+  const settingsToSave = { selectedAnim: option };
+  localStorage.setItem('animationSettings', JSON.stringify(settingsToSave));
+  selectedAnim.value = option;
+};
 
 function forceScrollToBottom() {
   chatContainer.value.scrollTop = chatContainer.value.scrollHeight;

@@ -6,17 +6,19 @@ $change: 15%;
   --primary: rgb(217,201,189);
   --secondary-grad: rgb(248, 233, 218);
   --chat: #FAF0EB;
+  --chat-message: #eae1dd;
   --bg-color1: #f4f4f4;
   --font-color: #121416;
   --button: #FFD6BA;
-  --button-hover: rgb(237,221,209);
+  --button-hover: rgb(229, 213, 201);
 }
 
 [data-theme="dark"] {
   --primary: rgb(84, 67, 59);
   --secondary-grad: rgb(35, 49, 63);
   --chat: #1f1e1d;
+  --chat-message: #2f2e2d;
   --bg-color1: #121416;
   --font-color: #f4f4f4;
-  --button-hover: rgb(104, 87, 79);
+  --button-hover: rgb(93, 77, 70);
 }
