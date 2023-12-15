@@ -19,7 +19,6 @@ import Message from './Message.vue';
 import InputBox from './InputBox.vue';
 import ToggleButton from './ToggleButton.vue'
 import Menu from './Menu.vue'
-import UserHeader from "./UserHeader.vue";
 import notify from "../js-modules/notify";
 import transformWord from "../js-modules/TransformWord";
 
@@ -56,7 +55,7 @@ onMounted(() => {
         isNotified = true;
     } else if (Notification.permission !== 'denied') {
         let permission = await Notification.requestPermission();
-        isNotified = permission === 'isNotified' ? true : false;
+        isNotified = permission === 'isNotified';
     }
   })();
 
@@ -129,32 +128,35 @@ watch(unreadMessages, () => {
 @use "../scss/abstracts/index" as *;
 @use '../scss/test';
 
-    .chat-container {
-        width: 60%;
-        height: 60vh;
-        margin: auto auto 10px;
-        //border-bottom: $base-border-radius solid var(--primary);
-        background-color: var(--chat);
-        overflow-y: scroll;
-        scrollbar-color: auto;
-        animation: $fadeTransition;
-        .message-container{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            // justify-content: flex-end;
-            > :first-child {
-                margin-top: auto !important;
-            }
-            * {
-                overflow-anchor: none;
-            }
-            #scroll-anchor {
-                overflow-anchor: auto;
-                height: 1px;
-                flex-shrink: 0;
-            }
-        }
+.chat-container {
+  width: 60%;
+  height: 60vh;
+  margin: auto auto 10px;
+  //border-bottom: $base-border-radius solid var(--primary);
+  background-color: var(--chat);
+  overflow-y: scroll;
+  scrollbar-color: auto;
+  animation: $fadeTransition;
+
+  .message-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: flex-end;
+    > :first-child {
+      margin-top: auto !important;
     }
+
+    * {
+      overflow-anchor: none;
+    }
+
+    #scroll-anchor {
+      overflow-anchor: auto;
+      height: 1px;
+      flex-shrink: 0;
+    }
+  }
+}
 
 </style>
