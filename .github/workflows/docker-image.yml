@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag kaiwa && docker run kaiwa -p 80:8080 -d
+      run: docker build . --file Dockerfile --tag kaiwa && docker run -d kaiwa -p 80:8080
