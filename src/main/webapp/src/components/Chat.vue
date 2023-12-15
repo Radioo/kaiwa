@@ -21,7 +21,7 @@ import ToggleButton from './ToggleButton.vue'
 import Menu from './Menu.vue'
 import UserHeader from "./UserHeader.vue";
 import notify from "../js-modules/notify";
-import transformWord from "../js-modules/transformWord";
+import transformWord from "../js-modules/TransformWord";
 
 const username = ref("");
 const messages = ref([]);
