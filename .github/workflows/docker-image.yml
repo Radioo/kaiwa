@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Remove previous Docker image
+    - run: docker ps -q --filter "name=kaiwa" | grep -q . && docker stop kaiwa && docker rm -fv kaiwa
     - name: Build the Docker image
-      run: docker rm $(docker stop $(docker ps -a -q  --filter ancestor=kaiwa)) ; docker build . --file Dockerfile --tag kaiwa && docker run -d -p 8080:8080 kaiwa
+      run: docker build . --file Dockerfile --tag kaiwa && docker run -d --name kaiwa -p 8080:8080 kaiwa
