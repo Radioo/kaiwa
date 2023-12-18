@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Create docker volume if not exists
       run: docker volume create kaiwa-db || true
-    - name: Remove previous docker container
+    - name: Remove previous image
       run: docker images -q --filter "reference=kaiwa" | grep -q . && docker rmi -f kaiwa || true
     - name: Remove previous running container
       run: docker ps -q --filter "name=kaiwa" | grep -q . && docker rm -f kaiwa || true
