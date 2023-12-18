@@ -14,7 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Create docker volume if not exists
+      run: docker volume create kaiwa-db || true
     - name: Remove previous Docker image
       run: docker ps -q --filter "name=kaiwa" | grep -q . && docker stop kaiwa && docker rm -fv kaiwa || true
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag kaiwa && docker run -d --name kaiwa -p 8080:8080 kaiwa
+      run: docker build . --file Dockerfile --tag kaiwa
+    - name: Run the Docker image
+      run: docker run -d --name kaiwa -p 8080:8080 -v kaiwa-db/kaiwa.mv.db:/root/kaiwa.mv.db kaiwa
