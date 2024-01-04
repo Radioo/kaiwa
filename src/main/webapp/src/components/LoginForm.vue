@@ -43,18 +43,8 @@ function logIn() {
 @use "../scss/abstracts/index" as *;
 @use '../scss/test';
 
-@mixin inputstuff{
-  font-size: $font-size-base;
-  margin: $base-margin 0 $base-margin;
-  padding: $base-padding;
-  border-radius: $base-border-radius;
-  border-width: $base-border-thickness;
-  background-color: var(--chat);
-  color: var(--font-color);
-}
-
 .login-form {
-    width: 33%;
+    width: 25%;
     margin: 0 auto;
     display: grid;
     grid-template-rows: repeat(3, 5em);

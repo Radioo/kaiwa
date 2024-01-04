@@ -30,15 +30,17 @@ const props = defineProps({
   margin: 0 30px 20px 30px;
   padding: 10px;
   border-radius: $base-border-radius;
+  font-size: $font-size-base;
   #message-user{
       margin-left: 10px;
-      width: 14%;
+      width: 16%;
   }
   #message-timestamp{
-    width: 14%;
+    width: 16%;
+    margin-left: 5px;
   }
   #message-message{
-      width: 66%;
+      width: 64%;
       overflow-wrap: break-word;
   }
 }
@@ -75,4 +77,38 @@ const props = defineProps({
   }
 }
 
+@media (max-width: $mobile-width){
+  .chat-message {
+    margin: 0 8px 8px 8px;
+    font-size: $font-size-mobile;
+    padding: 6px;
+    #message-timestamp{
+      font-size: 0.6rem;
+    }
+    #message-user{
+      margin-left: 2px;
+    }
+  }
+}
+
+@media (max-width: $mobile-width-smaller){
+  .chat-message {
+    font-size: $font-size-mobile-smaller;
+    #message-timestamp{
+      font-size: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: $mobile-width-smallest){
+  .chat-message {
+    font-size: $font-size-mobile-smallest;
+    #message-timestamp{
+      font-size: 0.42rem;
+    }
+    #message-message{
+      width: 58%;
+    }
+  }
+}
 </style>

@@ -18,15 +18,17 @@
   <div id="popup">
     <img src="../../static/images/Settings.svg" alt="hello" id="main">
     <img src="../../static/images/Close.svg" alt="hello" id="close" @click="closePopup">
-    <h2>Settings</h2>
-    <h3>Message appearance animation</h3>
-    <div class="radio">
-      <input v-model="selectedAnim" class="radio__input" type="radio" value="fade-in-anim" name="myRadio" id="myRadio1" @change="emitOptionChange">
-      <label class="radio__label" for="myRadio1">Fade in</label>
-      <input v-model="selectedAnim" class="radio__input" type="radio" value="slide-in-anim" name="myRadio" id="myRadio2" @change="emitOptionChange">
-      <label class="radio__label" for="myRadio2">Slide left</label>
-      <input v-model="selectedAnim" class="radio__input" type="radio" value="reveal-in-anim" name="myRadio" id="myRadio3" @change="emitOptionChange">
-      <label class="radio__label" for="myRadio3">Slide up</label>
+    <div id="settings-container">
+      <h2>Settings</h2>
+      <h3>Message appearance animation</h3>
+      <div class="radio">
+        <input v-model="selectedAnim" class="radio__input" type="radio" value="fade-in-anim" name="myRadio" id="myRadio1" @change="emitOptionChange">
+        <label class="radio__label" for="myRadio1">Fade in</label>
+        <input v-model="selectedAnim" class="radio__input" type="radio" value="slide-in-anim" name="myRadio" id="myRadio2" @change="emitOptionChange">
+        <label class="radio__label" for="myRadio2">Slide left</label>
+        <input v-model="selectedAnim" class="radio__input" type="radio" value="reveal-in-anim" name="myRadio" id="myRadio3" @change="emitOptionChange">
+        <label class="radio__label" for="myRadio3">Slide up</label>
+      </div>
     </div>
   </div>
 
@@ -75,6 +77,7 @@ const emitOptionChange = () => {
 
 #sidebar {
   position: absolute;
+  z-index: 15;
   top: 0;
   width: 14%;
   height: 100%;
@@ -85,7 +88,7 @@ const emitOptionChange = () => {
 
   #user-header{
     display: block;
-    padding: 20px 0 20px 20px;
+    padding: 10px;
     font-size: $font-size-large;
   }
   .sidebar-button {
@@ -101,7 +104,6 @@ const emitOptionChange = () => {
     justify-content: center;
     margin-top: 10%;
     margin-bottom: 10%;
-    padding: 24px 32px;
     outline: none;
     &:hover {
       background-color: var(--button-hover);
@@ -111,7 +113,7 @@ const emitOptionChange = () => {
   .toggle-btn {
     position: absolute;
     top: 1em;
-    left: 18em;
+    left: 110%;
   }
   #logout {
     position: absolute;
@@ -157,7 +159,7 @@ const emitOptionChange = () => {
   box-shadow: 0 0 14px var(--secondary-grad);
   visibility: hidden;
   transition: transform 0.4s, top 0.4s;
-  z-index: 10;
+  z-index: 20;
   #main{
     width: 24%;
     margin-top: -12%;
@@ -207,5 +209,94 @@ const emitOptionChange = () => {
   background: #006B56;
 }
 
+@media (max-width: $mobile-width){
+  #sidebar {
+    width: 42%;
+    left: -42%;
+    #user-header{
+      display: block;
+      font-size: $font-size-mobile-large;
+    }
+    .sidebar-button {
+      font-size: $font-size-mobile;
+    }
+    #logout {
+      button {
+        font-size: $font-size-mobile;
+      }
+    }
+  }
+  #popup {
+    width: 66%;
+    height: 33%;
+    padding: 0 20px 20px;
+    h3, h2{
+      font-size: $font-size-mobile;
+      height: 10%;
+    }
+  }
+  .radio__label{
+    font-size: $font-size-mobile;
+  }
+  .toggle-btn span {
+    width: 35px;
+    height: 4px;
+  }
+}
+@media (max-width: $mobile-width-smaller){
+  #sidebar {
+    #user-header{
+      font-size: $font-size-mobile-smaller-large;
+    }
+    .sidebar-button {
+      font-size: $font-size-mobile-smaller;
+    }
+    #logout {
+      button {
+        font-size: $font-size-mobile-smaller;
+      }
+    }
+  }
+  #popup {
+    h3, h2{
+      font-size: $font-size-mobile-smaller;
+    }
+  }
+  .radio__label{
+    font-size: $font-size-mobile-smaller;
+  }
+  .toggle-btn span {
+    width: 30px;
+    height: 3px;
+  }
+}
+
+@media (max-width: $mobile-width-smallest){
+  #sidebar {
+    #user-header{
+      font-size: $font-size-mobile-smallest-large;
+    }
+    .sidebar-button {
+      font-size: $font-size-mobile-smallest;
+    }
+    #logout {
+      button {
+        font-size: $font-size-mobile-smallest;
+      }
+    }
+  }
+  #popup {
+    h3, h2{
+      font-size: $font-size-mobile-smallest;
+    }
+  }
+  .radio__label{
+    font-size: $font-size-mobile-smallest;
+  }
+  .toggle-btn span {
+    width: 30px;
+    height: 3px;
+  }
+}
 
 </style>

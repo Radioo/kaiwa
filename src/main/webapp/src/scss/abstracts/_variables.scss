@@ -16,3 +16,19 @@ $font-size-base: 1rem;
 $font-size-small: $font-size-base * 0.75;
 $font-size-large: $font-size-base * 1.5;
 
+$font-size-mobile: 0.8rem;
+$font-size-mobile-large: $font-size-mobile * 1.5;
+$font-size-mobile-small: $font-size-mobile * 0.75;
+
+$font-size-mobile-smaller: 0.66rem;
+$font-size-mobile-smaller-large: $font-size-mobile-smaller * 1.5;
+$font-size-mobile-smaller-small: $font-size-mobile-smaller * 0.75;
+
+$font-size-mobile-smallest: 0.55rem;
+$font-size-mobile-smallest-large: $font-size-mobile-smallest * 1.5;
+$font-size-mobile-smallest-small: $font-size-mobile-smallest * 0.75;
+
+// mobile
+$mobile-width: 600px;
+$mobile-width-smaller: 375px;
+$mobile-width-smallest: 300px;

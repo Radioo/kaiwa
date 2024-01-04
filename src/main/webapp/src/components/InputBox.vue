@@ -35,15 +35,7 @@ function sendMessage() {
 
 <style lang="scss">
 @use "../scss/abstracts/index" as *;
-@mixin inputstuff{
-  font-size: $font-size-base;
-  margin: $base-margin 0 $base-margin;
-  padding: $base-padding;
-  border-radius: $base-border-radius;
-  border-width: $base-border-thickness;
-  background-color: var(--chat);
-  color: var(--font-color);
-}
+
 
 .input-container{
   width: 60%;
@@ -59,10 +51,46 @@ function sendMessage() {
     .user-input, .send-button{
       @include inputstuff;
       width: 15%;
+      padding: 0;
     }
     .message-input{
       @include inputstuff;
       flex: 1.5;
+      padding: 0;
+      padding-left: 10px;
+    }
+  }
+}
+
+@media (max-width: $mobile-width){
+  .input-container{
+    width: 90%;
+    position: absolute;
+    bottom: 2%;
+    left: 5%;
+    height: 10vh;
+    .form-container{
+      height: 100%;
+      .user-input, .send-button{
+        font-size: $font-size-mobile;
+        height: 63%;
+      }
+      .message-input{
+        font-size: $font-size-mobile;
+        height: 60%;
+      }
+    }
+  }
+}
+@media (max-width: $mobile-width-smaller){
+  .input-container{
+    .form-container{
+      .user-input, .send-button{
+        font-size: $font-size-mobile-smaller;
+      }
+      .message-input{
+        font-size: $font-size-mobile-smaller;
+      }
     }
   }
 }
