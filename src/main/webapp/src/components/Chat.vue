@@ -21,6 +21,7 @@ import ToggleButton from './ToggleButton.vue'
 import Menu from './Menu.vue'
 import notify from "../js-modules/notify";
 import transformWord from "../js-modules/TransformWord";
+import transformDate from "../js-modules/TransformDate";
 
 const username = ref("");
 const messages = ref([]);
@@ -45,6 +46,7 @@ onMounted(() => {
       const messagesJson = [...json.reverse()]
       for (let i in messagesJson){
         messagesJson[i].text = transformWord(messagesJson[i].text, i)
+        messagesJson[i].date = transformDate(messagesJson[i].date)
         messages.value.push(messagesJson[i])
       }
     })
@@ -73,6 +75,7 @@ onMounted(() => {
 
     const message = JSON.parse(event.data);
     message.text = transformWord(message.text, messages.value.length)
+    message.date = transformDate(message.date)
 
     console.log(message);
 
