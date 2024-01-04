@@ -49,6 +49,9 @@ function logIn() {
     display: grid;
     grid-template-rows: repeat(3, 5em);
     row-gap: 10px;
+    justify-content: space-around;
+    grid-template-columns: repeat(1, 100%);
+    font-size: 15px;
     input {
       @include inputstuff;
     }
