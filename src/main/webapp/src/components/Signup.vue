@@ -91,6 +91,8 @@ h2 {
   display: grid;
   grid-template-rows: repeat(4, 5em);
   row-gap: 10px;
+  justify-content: space-around;
+  grid-template-columns: repeat(1, 100%);
   input {
     @include inputstuff;
   }

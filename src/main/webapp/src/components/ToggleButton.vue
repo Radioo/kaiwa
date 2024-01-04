@@ -38,12 +38,19 @@ const toggleTheme = () => {
     background: transparent;
     cursor: pointer;
     border-radius: 5px;
-    width: 2%;
-    height: auto;
+    width: 3em;
+    height: 3em;
     animation: $fadeTransition;
     svg{
       height: 100%;
     }
   }
+
+@media (max-width: $mobile-width){
+  .click {
+    width: 2em;
+    height: 2em;
+  }
+}
 
 </style>

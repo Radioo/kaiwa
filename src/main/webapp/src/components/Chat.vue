@@ -159,4 +159,11 @@ watch(unreadMessages, () => {
   }
 }
 
+@media (max-width: $mobile-width){
+  .chat-container {
+    width: 90%;
+    height: 72vh;
+  }
+}
+
 </style>
