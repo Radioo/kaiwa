@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,7 +74,11 @@ public class RoutingController {
                 newMessage.getId(),
                 newMessage.getUser().getName(),
                 newMessage.getText(),
-                newMessage.getParsedDate()
+                newMessage.getParsedDate(),
+                service.getEmitters().stream()
+                        .map(emitter -> emitter.principal.getName())
+                        .distinct()
+                        .collect(Collectors.toList())
         ));
 
         return ResponseEntity.ok().build();
@@ -89,7 +94,8 @@ public class RoutingController {
                         message.getId(),
                         message.getUser().getName(),
                         message.getText(),
-                        message.getParsedDate()
+                        message.getParsedDate(),
+                        new ArrayList<>()
                 ))
                 .collect(Collectors.toList());
     }

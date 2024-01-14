@@ -9,6 +9,13 @@
     </div>
   </div>
 
+  <div id="connected-users">
+    <h3>Chatting now:</h3>
+    <ul>
+      <li v-for="user in connectedUsers" :key="user">{{ user }}</li>
+    </ul>
+  </div>
+
   <InputBox @messageSent="addMessage" :username="username" />
 </template>
 
@@ -25,6 +32,7 @@ import transformDate from "../js-modules/TransformDate";
 
 const username = ref("");
 const messages = ref([]);
+const connectedUsers = ref([]);
 const chatContainer = ref(null);
 let isNotified = false;
 let isFocused = true;
@@ -77,7 +85,11 @@ onMounted(() => {
     message.text = transformWord(message.text, messages.value.length)
     message.date = transformDate(message.date)
 
-    console.log(message);
+    console.log('SSEMessage', message);
+
+    if(message.connectedUsers) {
+      connectedUsers.value = message.connectedUsers;
+    }
 
     messages.value.push(message);
 

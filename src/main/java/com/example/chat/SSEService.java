@@ -12,31 +12,24 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class SSEService {
-    private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private final List<EmitterPrincipal> emitters = new CopyOnWriteArrayList<>();
 
-    public void addEmitter(SseEmitter emitter) {
-        emitters.add(emitter);
-        emitter.onCompletion(() -> emitters.remove(emitter));
-        emitter.onTimeout(() -> emitters.remove(emitter));
+    public List<EmitterPrincipal> getEmitters() {
+        return emitters;
     }
 
-    public void sendString(String data) {
-        for (SseEmitter emitter : emitters) {
-            try {
-                emitter.send(data);
-            } catch (IOException e) {
-                emitter.complete();
-                emitters.remove(emitter);
-            }
-        }
+    public void addEmitter(EmitterPrincipal emitter) {
+        emitters.add(emitter);
+        emitter.emitter.onCompletion(() -> emitters.remove(emitter));
+        emitter.emitter.onTimeout(() -> emitters.remove(emitter));
     }
 
     public void sendMessage(MessageResponse message) {
-        for (SseEmitter emitter : emitters) {
+        for (EmitterPrincipal emitter : emitters) {
             try {
-                emitter.send(message);
+                emitter.emitter.send(message);
             } catch (IOException e) {
-                emitter.complete();
+                emitter.emitter.complete();
                 emitters.remove(emitter);
             }
         }
