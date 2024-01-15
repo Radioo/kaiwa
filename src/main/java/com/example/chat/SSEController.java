@@ -21,4 +21,11 @@ class SSEController {
         service.addEmitter(new EmitterPrincipal(emitter, principal));
         return emitter;
     }
+
+    @GetMapping(path = "/currentUsers", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter getCurrentUsers() {
+        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
+        service.addCurrentUsersEmitter(emitter);
+        return emitter;
+    }
 }

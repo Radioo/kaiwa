@@ -74,11 +74,7 @@ public class RoutingController {
                 newMessage.getId(),
                 newMessage.getUser().getName(),
                 newMessage.getText(),
-                newMessage.getParsedDate(),
-                service.getEmitters().stream()
-                        .map(emitter -> emitter.principal.getName())
-                        .distinct()
-                        .collect(Collectors.toList())
+                newMessage.getParsedDate()
         ));
 
         return ResponseEntity.ok().build();
@@ -94,8 +90,7 @@ public class RoutingController {
                         message.getId(),
                         message.getUser().getName(),
                         message.getText(),
-                        message.getParsedDate(),
-                        new ArrayList<>()
+                        message.getParsedDate()
                 ))
                 .collect(Collectors.toList());
     }

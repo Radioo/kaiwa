@@ -10,16 +10,14 @@ public class MessageResponse {
     private String user;
     private String text;
     private String date;
-    private List<String> connectedUsers;
 
     public MessageResponse() {
     }
 
-    public MessageResponse(Long id, String user, String text, String date, List<String> connectedUsers) {
+    public MessageResponse(Long id, String user, String text, String date) {
         this.id = id;
         this.user = user;
         this.text = text;
         this.date = date;
-        this.connectedUsers = connectedUsers;
     }
 }

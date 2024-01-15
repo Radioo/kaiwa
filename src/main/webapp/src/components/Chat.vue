@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import Logo from './Logo.vue';
 import Message from './Message.vue';
 import InputBox from './InputBox.vue';
@@ -43,6 +43,7 @@ const selectedAnim = ref(savedSettings?.selectedAnim || 'slide-in-anim');
 
 onMounted(() => {
   const evtSource = new EventSource("/sse");
+  const evtSourceCurrentUsers = new EventSource("/currentUsers");
 
   fetch("/username")
       .then(response => response.text())
@@ -87,10 +88,6 @@ onMounted(() => {
 
     console.log('SSEMessage', message);
 
-    if(message.connectedUsers) {
-      connectedUsers.value = message.connectedUsers;
-    }
-
     messages.value.push(message);
 
     if (!isFocused) {
@@ -102,6 +99,11 @@ onMounted(() => {
       if(isNotified && message.user != username.value)
         notify(message.user, message.text);
     }
+  };
+
+  evtSourceCurrentUsers.onmessage = (event) => {
+    console.log('evtSourceCurrentUsers', event);
+    connectedUsers.value = JSON.parse(event.data);
   };
 
   fetch("/username")
