@@ -1,13 +1,10 @@
 package com.example.chat;
 
-import com.example.chat.model.Message;
 import com.example.chat.model.MessageResponse;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import org.yaml.snakeyaml.emitter.Emitter;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -37,6 +34,7 @@ public class SSEService {
             currentUsers.remove(emitter.principal.getName());
             sendCurrentUsers();
         });
+
         emitter.emitter.onError((e) -> {
             emitters.remove(emitter);
             currentUsers.remove(emitter.principal.getName());
@@ -66,8 +64,19 @@ public class SSEService {
 
     private void sendCurrentUsers() {
         for(SseEmitter emitter : currentUsersEmitters) {
+            List<String> aliveEmitters = new ArrayList<>();
+            for(EmitterPrincipal ep : emitters) {
+                try {
+                    ep.emitter.send("test");
+                    aliveEmitters.add(ep.principal.getName());
+                }
+                catch(Exception ignored) {
+
+                }
+            }
+
             try {
-                emitter.send(currentUsers);
+                emitter.send(aliveEmitters);
             } catch (Exception e) {
                 emitter.complete();
                 currentUsersEmitters.remove(emitter);

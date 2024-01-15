@@ -82,6 +82,10 @@ onMounted(() => {
   evtSource.onmessage = (event) => {
     console.log(event);
 
+    if(event.data === "test") {
+      return;
+    }
+
     const message = JSON.parse(event.data);
     message.text = transformWord(message.text, messages.value.length)
     message.date = transformDate(message.date)
