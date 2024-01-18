@@ -41,6 +41,13 @@ const unreadMessages = ref(0);
 const savedSettings = JSON.parse(localStorage.getItem('animationSettings'));
 const selectedAnim = ref(savedSettings?.selectedAnim || 'slide-in-anim');
 
+let isCensored;
+if (!localStorage.getItem('censor'))
+  isCensored = "T"
+else
+  isCensored = JSON.parse(localStorage.getItem('censor'))
+  
+
 onMounted(() => {
   const evtSource = new EventSource("/sse");
   const evtSourceCurrentUsers = new EventSource("/currentUsers");
@@ -55,6 +62,8 @@ onMounted(() => {
       const messagesJson = [...json.reverse()]
       for (let i in messagesJson){
         messagesJson[i].text = transformWord(messagesJson[i].text, i)
+        if (isCensored == "T")
+          messagesJson[i].text = swearFilter(messagesJson[i].text)
         messagesJson[i].date = transformDate(messagesJson[i].date)
         messages.value.push(messagesJson[i])
       }
@@ -88,6 +97,8 @@ onMounted(() => {
 
     const message = JSON.parse(event.data);
     message.text = transformWord(message.text, messages.value.length)
+    if (isCensored == "T")
+      message.text = swearFilter(message.text)
     message.date = transformDate(message.date)
 
     console.log('SSEMessage', message);
