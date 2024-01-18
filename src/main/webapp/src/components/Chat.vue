@@ -50,8 +50,18 @@ else
   
 
 onMounted(() => {
+  const ws = new WebSocket("ws://" + window.location.host + "/ws");
   const evtSource = new EventSource("/sse");
-  const evtSourceCurrentUsers = new EventSource("/currentUsers");
+
+  ws.onmessage = (message) => {
+    console.log('WSMessage', message.data);
+
+    const { type, data} = JSON.parse(message.data);
+
+    if(type === "connectedUsers") {
+      connectedUsers.value = data;
+    }
+  };
 
   fetch("/username")
       .then(response => response.text())
@@ -115,11 +125,6 @@ onMounted(() => {
       if(isNotified && message.user != username.value)
         notify(message.user, message.text);
     }
-  };
-
-  evtSourceCurrentUsers.onmessage = (event) => {
-    console.log('evtSourceCurrentUsers', event);
-    connectedUsers.value = JSON.parse(event.data);
   };
 
   fetch("/username")
