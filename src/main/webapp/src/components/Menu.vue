@@ -9,7 +9,7 @@
     <button class="sidebar-button">Temp1</button>
     <button class="sidebar-button">Temp1</button>
     <button class="sidebar-button">Temp1</button>
-    <button class="sidebar-button">Temp1</button>
+    <button class="sidebar-button" @click="toggleCensor()" id="censor"></button>
     <button class="sidebar-button" @click="openPopup()">Settings</button>
     <div class="" id="logout">
       <button onclick="location.href='/logout'">Log out</button>
@@ -62,6 +62,29 @@ const closePopup = () => {
   const popup = document.getElementById('popup');
   popup.classList.remove("open-popup");
 };
+  
+
+let isCensored
+if (!localStorage.getItem('censor'))
+  isCensored = "T"
+else
+  isCensored = JSON.parse(localStorage.getItem('censor'))
+
+setTimeout(function() {
+  document.getElementById("censor").innerHTML = "Censor: " + (isCensored=="T"?"ON":"OFF")
+}, 0);
+
+const toggleCensor = () => {
+  if (isCensored == "T")
+    isCensored = "F"
+  else
+    isCensored = "T"
+  
+  document.getElementById("censor").innerHTML = "Censor: " + (isCensored=="T"?"ON":"OFF")
+  localStorage.setItem('censor', JSON.stringify(isCensored))
+  location.reload()
+};
+  
 
 const emit = defineEmits(["optionChanged"])
 const emitOptionChange = () => {
