@@ -26,6 +26,7 @@ import Message from './Message.vue';
 import InputBox from './InputBox.vue';
 import ToggleButton from './ToggleButton.vue'
 import Menu from './Menu.vue'
+import swearFilter from "../js-modules/SwearFilter";
 import notify from "../js-modules/notify";
 import transformWord from "../js-modules/TransformWord";
 import transformDate from "../js-modules/TransformDate";
