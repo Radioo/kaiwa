@@ -44,6 +44,7 @@ public class SocketHandler extends TextWebSocketHandler {
         webSocketTemplate.type = "connectedUsers";
         webSocketTemplate.data = sessions.stream()
                 .map(session -> Objects.requireNonNull(session.getPrincipal()).getName())
+                .distinct()
                 .collect(java.util.stream.Collectors.toList());
         String json = new Gson().toJson(webSocketTemplate);
         for (WebSocketSession session : sessions) {
