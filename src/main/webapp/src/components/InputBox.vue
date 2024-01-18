@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import filterWord from "../js-modules/SwearFilter";
-import swearFilter from "../js-modules/SwearFilter";
 
 const emit = defineEmits(["messageSent"])
 
@@ -18,7 +16,7 @@ function sendMessage() {
         return;
     }
 
-    emit("messageSent", swearFilter(messageContent.value));
+    emit("messageSent", messageContent.value);
 
     messageContent.value = "";
 }
