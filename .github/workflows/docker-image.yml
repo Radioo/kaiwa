@@ -14,11 +14,19 @@ jobs:
     - uses: actions/checkout@v3
     - name: Create docker volume if not exists
       run: docker volume create kaiwa-db || true
-    - name: Remove previous image
-      run: docker images -q --filter "reference=kaiwa" | grep -q . && docker rmi -f kaiwa || true
-    - name: Remove previous running container
-      run: docker ps -q --filter "name=kaiwa" | grep -q . && docker rm -f kaiwa || true
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag kaiwa
-    - name: Run the Docker image
+    - name: Stop container
+      run: docker stop kaiwa || true
+    - name: Clean up docker
+      run: docker system prune --all --force
+    - name: Build image
+      run: docker build -t kaiwa .
+    - name: Run container
       run: docker run -d --name kaiwa -p 8080:8080 -v kaiwa-db:/root/kaiwa kaiwa
+#    - name: Remove previous image
+#      run: docker images -q --filter "reference=kaiwa" | grep -q . && docker rmi -f kaiwa || true
+#    - name: Remove previous running container
+#      run: docker ps -q --filter "name=kaiwa" | grep -q . && docker rm -f kaiwa || true
+#    - name: Build the Docker image
+#      run: docker build . --file Dockerfile --tag kaiwa
+#    - name: Run the Docker image
+#      run: docker run -d --name kaiwa -p 8080:8080 -v kaiwa-db:/root/kaiwa kaiwa
