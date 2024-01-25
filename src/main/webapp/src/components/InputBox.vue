@@ -45,17 +45,18 @@ function sendMessage() {
     flex-direction: row;
     height: 5rem;
     gap: 10px;
-
     .user-input, .send-button{
       @include inputstuff;
       width: 15%;
       padding: 0;
+      //border: 2px;
     }
     .message-input{
       @include inputstuff;
       flex: 1.5;
       padding: 0;
       padding-left: 10px;
+      border: 2px;
     }
   }
 }

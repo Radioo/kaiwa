@@ -56,7 +56,11 @@ function logIn() {
       @include inputstuff;
     }
 }
-
+@media (max-width: $mobile-width){
+  .login-form{
+    width: 50%;
+  }
+}
 #error-message {
   color: red;
 }

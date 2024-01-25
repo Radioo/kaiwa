@@ -73,5 +73,19 @@ p, .account-prompt {
   width: 15%;
   height: 10%;
 }
+
+@media (max-width: $mobile-width){
+  #register-button{
+    width: 25%;
+  }
+  .account-prompt {
+    span {
+      &:before, &:after {
+        width: 50px;
+      }
+
+    }
+  }
+}
 </style>
 

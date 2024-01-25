@@ -147,4 +147,12 @@ h2 {
 #error-message {
   color: red;
 }
+@media (max-width: $mobile-width){
+  .signup-form {
+    width: 50%;
+    .password-requirements{
+      font-size: $font-size-mobile-smaller;
+    }
+  }
+}
 </style>

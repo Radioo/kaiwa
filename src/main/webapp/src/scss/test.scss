@@ -2,9 +2,12 @@
 
 body{
   margin: 0;
-  color: var(--font-color)
+  color: var(--font-color);
+  font-family: sans-serif;
 }
-
+button, input{
+  border: 2px;
+}
 #chat{
   margin: 0;
   background: linear-gradient(120deg, var(--primary), var(--secondary-grad));
