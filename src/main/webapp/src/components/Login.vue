@@ -72,11 +72,15 @@ p, .account-prompt {
   @include inputstuff;
   width: 15%;
   height: 10%;
+  &:hover{
+    background-color: var(--chat-message);
+  }
 }
 
 @media (max-width: $mobile-width){
   #register-button{
     width: 25%;
+    font-size: $font-size-mobile;
   }
   .account-prompt {
     span {

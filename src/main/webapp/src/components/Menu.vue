@@ -152,7 +152,7 @@ const emitOptionChange = () => {
     button {
       height: 5vh;
       width: 100%;
-      background-color: #a62f2f;
+      background-color: var(--logout);
       border-radius: $base-border-radius;
       border-width: $base-border-thickness;
       display: flex;
@@ -160,8 +160,8 @@ const emitOptionChange = () => {
       justify-content: center;
       font-weight: 500;
       font-size: 16px;
-      :hover{
-        background-color: #b23232;
+      &:hover{
+        background-color: #bb3434;
       }
     }
   }
@@ -355,6 +355,7 @@ const emitOptionChange = () => {
   }
   #connected-users{
     font-size: $font-size-mobile-smallest;
+    height: 40%;
     ul{
       li{
         font-size: $font-size-mobile-smallest;

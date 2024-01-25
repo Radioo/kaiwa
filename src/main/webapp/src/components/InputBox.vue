@@ -49,7 +49,9 @@ function sendMessage() {
       @include inputstuff;
       width: 15%;
       padding: 0;
-      //border: 2px;
+      &:hover{
+        background-color: var(--chat-message);
+      }
     }
     .message-input{
       @include inputstuff;
@@ -57,6 +59,9 @@ function sendMessage() {
       padding: 0;
       padding-left: 10px;
       border: 2px;
+      &:hover{
+        background-color: var(--chat-message);
+      }
     }
   }
 }

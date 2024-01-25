@@ -150,6 +150,7 @@ h2 {
 @media (max-width: $mobile-width){
   .signup-form {
     width: 50%;
+    font-size: $font-size-mobile;
     .password-requirements{
       font-size: $font-size-mobile-smaller;
     }

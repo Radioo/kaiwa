@@ -59,6 +59,7 @@ function logIn() {
 @media (max-width: $mobile-width){
   .login-form{
     width: 50%;
+    font-size: $font-size-mobile;
   }
 }
 #error-message {
