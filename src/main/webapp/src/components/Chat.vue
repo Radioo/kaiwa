@@ -43,7 +43,7 @@ else
   
 
 onMounted(() => {
-  const ws = new WebSocket("ws://" + window.location.host + "/ws");
+  const ws = new WebSocket("wss://" + window.location.host + "/ws");
   const evtSource = new EventSource("/sse");
 
   ws.onmessage = (message) => {
