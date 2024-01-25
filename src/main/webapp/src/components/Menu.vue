@@ -5,14 +5,13 @@
       <span></span>
       <span></span>
     </div>
-    <span id="user-header">Hello {{ username }}</span>
+    <span id="user-header">Hello {{ username }}!</span>
     <div id="connected-users">
       <h3>Chatting now:</h3>
       <ul>
         <li v-for="user in connectedUsers" :key="user">{{ user }}</li>
       </ul>
     </div>
-<!--    <button class="sidebar-button" @click="toggleCensor()" id="censor"></button>-->
     <div class="description">Censor settings</div>
     <div class="radio">
       <input v-model="censorStatus" class="radio__input" type="radio" value="T" id="censorOn" @change="toggleCensor">
@@ -115,6 +114,8 @@ const emitOptionChange = () => {
     display: block;
     padding: 8px;
     width: 80%;
+    margin-top: 8px;
+    font-weight: 600;
     font-size: $font-size-large;
   }
   .sidebar-button {
@@ -136,7 +137,7 @@ const emitOptionChange = () => {
     }
   }
   .description{
-    margin: 12px 0 12px 0;
+    margin: 8px 0 8px 0;
   }
   .toggle-btn {
     position: absolute;
@@ -157,7 +158,8 @@ const emitOptionChange = () => {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 600;
+      font-weight: 500;
+      font-size: 16px;
       :hover{
         background-color: #b23232;
       }
@@ -202,9 +204,15 @@ const emitOptionChange = () => {
 }
 
 #connected-users{
-  height: 50%;
+  height: 45%;
   width: 80%;
   margin-bottom: 10px;
+  ul{
+    li{
+      margin-bottom: 5px;
+      font-size: $font-size-base;
+    }
+  }
 }
 
 @media (max-width: $smaller-width){
@@ -225,6 +233,11 @@ const emitOptionChange = () => {
   }
   #connected-users{
     font-size: $font-size-mobile;
+    ul{
+      li{
+        font-size: $font-size-mobile;
+      }
+    }
   }
   .description{
     font-size: $font-size-mobile;
@@ -238,8 +251,8 @@ const emitOptionChange = () => {
 
 @media (max-width: $mobile-width){
   #sidebar {
-    width: 42%;
-    left: -42%;
+    width: 36%;
+    left: -36%;
     #user-header{
       display: block;
       font-size: $font-size-mobile-large;
@@ -255,6 +268,11 @@ const emitOptionChange = () => {
   }
   #connected-users{
     font-size: $font-size-mobile;
+    ul{
+      li{
+        font-size: $font-size-mobile;
+      }
+    }
   }
   .description{
     font-size: $font-size-mobile;
@@ -293,6 +311,11 @@ const emitOptionChange = () => {
   }
   #connected-users{
     font-size: $font-size-mobile-smaller;
+    ul{
+      li{
+        font-size: $font-size-mobile-smaller;
+      }
+    }
   }
   .description{
     font-size: $font-size-mobile-smaller;
@@ -304,7 +327,7 @@ const emitOptionChange = () => {
   }
 }
 
-@media (max-width: $mobile-width-smallest){
+@media (max-width: $mobile-width-smallest), (max-height: $max-height){
   #sidebar {
     #user-header{
       font-size: $font-size-mobile-smallest-large;
@@ -329,6 +352,22 @@ const emitOptionChange = () => {
   .toggle-btn span {
     width: 30px;
     height: 3px;
+  }
+  #connected-users{
+    font-size: $font-size-mobile-smallest;
+    ul{
+      li{
+        font-size: $font-size-mobile-smallest;
+      }
+    }
+  }
+  .description{
+    font-size: $font-size-mobile-smallest;
+  }
+  .radio{
+    .radio__label{
+      font-size: $font-size-mobile-smallest;
+    }
   }
 }
 
