@@ -175,6 +175,7 @@ watch(unreadMessages, () => {
   overflow-y: scroll;
   scrollbar-color: auto;
   animation: $fadeTransition;
+  border-radius: 8px;
 
   .message-container {
     height: 100%;
@@ -209,10 +210,7 @@ watch(unreadMessages, () => {
   background-color: var(--chat-message);
   border-radius: 100px;
 }
-* {
-  scrollbar-width: auto;
-  scrollbar-color: blue orange;
-}
+
 @media (max-width: $mobile-width){
   .chat-container {
     width: 90%;

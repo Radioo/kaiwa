@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import EmojiPicker from './EmojiPicker.vue';
 
 const emit = defineEmits(["messageSent"])
 
@@ -20,21 +21,35 @@ function sendMessage() {
 
     messageContent.value = "";
 }
+
+const popupOpen = ref(false);
+
+function msgInputEnterHandler(e) {
+  if (e.code !== "Enter") {
+    return;
+  }
+  sendMessage();
+}
+
+function appendEmoji(emoji) {
+  messageContent.value += emoji;
+}
 </script>
 
 <template>
-    <div class="input-container">
-        <form class="form-container" @submit.prevent="sendMessage">
-            <input class="message-input" v-model="messageContent" placeholder="Message">
-            <button class="send-button">Send</button>
-        </form>
+  <div class="input-container">
+    <div class="form-container">
+        <input class="message-input" v-model="messageContent" placeholder="Message" @keydown="msgInputEnterHandler" />
+        <EmojiPicker @emojiPicked="appendEmoji"/>
+        <button class="btn" @click="sendMessage">Send</button>
     </div>
+  </div>
 </template>
 
 <style lang="scss">
 @use "../scss/abstracts/index" as *;
 
-.send-button {
+.btn {
   cursor: pointer;
 }
 
@@ -48,7 +63,7 @@ function sendMessage() {
     flex-direction: row;
     height: 5rem;
     gap: 10px;
-    .user-input, .send-button{
+    .user-input, .btn{
       @include inputstuff;
       width: 15%;
       padding: 0;
@@ -78,7 +93,7 @@ function sendMessage() {
     height: 10vh;
     .form-container{
       height: 100%;
-      .user-input, .send-button{
+      .user-input, .btn{
         font-size: $font-size-mobile;
         height: 63%;
       }
@@ -92,7 +107,7 @@ function sendMessage() {
 @media (max-width: $mobile-width-smaller){
   .input-container{
     .form-container{
-      .user-input, .send-button{
+      .user-input, .btn{
         font-size: $font-size-mobile-smaller;
       }
       .message-input{
