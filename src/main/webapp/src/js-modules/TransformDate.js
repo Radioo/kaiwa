@@ -3,6 +3,11 @@ const transformDate = (date) => {
     const now = new Date();
     const offsetMs = now.getTimezoneOffset() * 60 * 1000;
     const ms = now.getTime() - then.getTime() + offsetMs;
+
+    if(ms <= 0) {
+        return "Now";
+    }
+
     const sec = Math.floor(ms/1000)
     const min = Math.floor(sec/60)
     const hr = Math.floor(min/60)
