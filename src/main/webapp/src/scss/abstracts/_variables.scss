@@ -29,6 +29,9 @@ $font-size-mobile-smallest-large: $font-size-mobile-smallest * 1.5;
 $font-size-mobile-smallest-small: $font-size-mobile-smallest * 0.75;
 
 // mobile
-$mobile-width: 600px;
-$mobile-width-smaller: 375px;
+$smaller-width: 1280px;
+$mobile-width: 750px;
+$mobile-width-smaller: 450px;
 $mobile-width-smallest: 300px;
+
+$max-height: 600px;

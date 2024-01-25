@@ -30,6 +30,10 @@ const register = ref(false);
 @use "../scss/abstracts/index" as *;
 @use '../scss/test';
 
+#register-button {
+  cursor: pointer;
+}
+
 p, .account-prompt {
   text-align: center;
 }
@@ -72,6 +76,24 @@ p, .account-prompt {
   @include inputstuff;
   width: 15%;
   height: 10%;
+  &:hover{
+    background-color: var(--chat-message);
+  }
+}
+
+@media (max-width: $mobile-width){
+  #register-button{
+    width: 25%;
+    font-size: $font-size-mobile;
+  }
+  .account-prompt {
+    span {
+      &:before, &:after {
+        width: 50px;
+      }
+
+    }
+  }
 }
 </style>
 

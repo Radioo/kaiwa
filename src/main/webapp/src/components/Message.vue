@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-message" :class="props.animationClass">
+  <div class="chat-message" :class="[props.animationClass, { 'even': isEven, 'odd': !isEven }]">
     <div id="message-user" :class="props.animationClass">
       <b>{{ props.messageBody.user }}</b>
     </div>
@@ -16,6 +16,7 @@ const props = defineProps({
         date: String
     },
     animationClass: String,
+    isEven: Boolean
 });
 </script>
 
@@ -33,18 +34,23 @@ const props = defineProps({
   font-size: $font-size-base;
   #message-user{
       margin-left: 10px;
-      width: 16%;
+      width: 12%;
   }
   #message-timestamp{
-    width: 16%;
+    width: 12%;
     margin-left: 5px;
   }
   #message-message{
-      width: 64%;
+      width: 70%;
       overflow-wrap: break-word;
   }
 }
-
+.chat-message.even {
+  background-color: var(--chat-message);
+}
+.chat-message.odd {
+  background-color: var(--chat-message-darker);
+}
 .fade-in-anim{
   animation: $fadeTransition;
 }
@@ -76,17 +82,62 @@ const props = defineProps({
     transform: translate(0,0);
   }
 }
+@media (max-width: $smaller-width){
+  .chat-message {
+    margin: 0 14px 14px 14px;
+    //font-size: $font-size-mobile;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    #message-user {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      margin-left: 5px;
+    }
+    #message-timestamp {
+      grid-column: 2 / 3;
+      grid-row: 1;
+      text-align: right;
+      width: 92%;
+      font-size: 0.8rem;
+      margin-right: 5px;
+    }
+    #message-message {
+      grid-column: 1 / 3;
+      grid-row: 2;
+      margin: 8px 0 4px 5px;
+      width: 97%;
+    }
+  }
+}
 
 @media (max-width: $mobile-width){
   .chat-message {
-    margin: 0 8px 8px 8px;
+    margin: 0 14px 14px 14px;
     font-size: $font-size-mobile;
-    padding: 6px;
-    #message-timestamp{
-      font-size: 0.6rem;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    #message-user {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      margin-left: 5px;
     }
-    #message-user{
-      margin-left: 2px;
+    #message-timestamp {
+      grid-column: 2 / 3;
+      grid-row: 1;
+      text-align: right;
+      width: 92%;
+      font-size: 0.6rem;
+      margin-right: 5px;
+    }
+    #message-message {
+      grid-column: 1 / 3;
+      grid-row: 2;
+      margin: 8px 0 4px 5px;
+      width: 97%;
     }
   }
 }
@@ -106,9 +157,7 @@ const props = defineProps({
     #message-timestamp{
       font-size: 0.42rem;
     }
-    #message-message{
-      width: 58%;
-    }
   }
 }
+
 </style>

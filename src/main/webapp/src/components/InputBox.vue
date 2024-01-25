@@ -34,6 +34,9 @@ function sendMessage() {
 <style lang="scss">
 @use "../scss/abstracts/index" as *;
 
+.send-button {
+  cursor: pointer;
+}
 
 .input-container{
   width: 60%;
@@ -45,17 +48,23 @@ function sendMessage() {
     flex-direction: row;
     height: 5rem;
     gap: 10px;
-
     .user-input, .send-button{
       @include inputstuff;
       width: 15%;
       padding: 0;
+      &:hover{
+        background-color: var(--chat-message);
+      }
     }
     .message-input{
       @include inputstuff;
       flex: 1.5;
       padding: 0;
       padding-left: 10px;
+      border: 2px;
+      &:hover{
+        background-color: var(--chat-message);
+      }
     }
   }
 }

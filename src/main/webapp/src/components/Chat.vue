@@ -1,19 +1,12 @@
 <template>
   <Logo/>
   <ToggleButton/>
-  <Menu :username="username" @optionChanged="updateSelectedAnim"/>
+  <Menu :username="username" @optionChanged="updateSelectedAnim" :connectedUsers="connectedUsers"/>
   <div class="chat-container" ref="chatContainer">
     <div class="message-container" >
-      <Message v-for="msg in messages" :messageBody="msg" :animationClass="selectedAnim" />
+      <Message v-for="(msg, index) in messages" :key="msg.id"  :messageBody="msg" :animationClass="selectedAnim" :isEven="index % 2 === 0"/>
       <div id="scroll-anchor"></div>
     </div>
-  </div>
-
-  <div id="connected-users">
-    <h3>Chatting now:</h3>
-    <ul>
-      <li v-for="user in connectedUsers" :key="user">{{ user }}</li>
-    </ul>
   </div>
 
   <InputBox @messageSent="addMessage" :username="username" />
@@ -197,6 +190,22 @@ watch(unreadMessages, () => {
   }
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--chat);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--chat-message);
+  border-radius: 100px;
+}
+* {
+  scrollbar-width: auto;
+  scrollbar-color: blue orange;
+}
 @media (max-width: $mobile-width){
   .chat-container {
     width: 90%;

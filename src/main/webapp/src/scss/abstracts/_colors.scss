@@ -6,11 +6,13 @@ $change: 15%;
   --primary: rgb(217,201,189);
   --secondary-grad: rgb(248, 233, 218);
   --chat: #FAF0EB;
-  --chat-message: #eae1dd;
+  --chat-message: #eee4e1;
+  --chat-message-darker: #e0d5d0;
   --bg-color1: #f4f4f4;
   --font-color: #121416;
   --button: #FFD6BA;
   --button-hover: rgb(229, 213, 201);
+  --logout: #a62f2f;;
 }
 
 [data-theme="dark"] {
@@ -18,7 +20,9 @@ $change: 15%;
   --secondary-grad: rgb(35, 49, 63);
   --chat: #1f1e1d;
   --chat-message: #2f2e2d;
+  --chat-message-darker: #282726;
   --bg-color1: #121416;
   --font-color: #f4f4f4;
   --button-hover: rgb(93, 77, 70);
+  --logout: #a62f2f;
 }
