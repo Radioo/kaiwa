@@ -29,7 +29,7 @@
       <label class="radio__label" for="myRadio3">Slide up</label>
     </div>
     <div class="" id="logout">
-      <button onclick="location.href='/logout'">Log out</button>
+      <button onclick="location.href='/logout'" class="pointer">Log out</button>
     </div>
   </div>
 
@@ -73,7 +73,10 @@ else
   isCensored = JSON.parse(localStorage.getItem('censor'))
 
 setTimeout(function() {
-  document.getElementById("censor").innerHTML = "Censor: " + (isCensored=="T"?"ON":"OFF")
+  const censorEl = document.getElementById("censor");
+  if(censorEl) {
+    censorEl.innerHTML = "Censor: " + (isCensored=="T"?"ON":"OFF")
+  }
 }, 0);
 
 const censorStatus = ref(isCensored);
@@ -370,6 +373,10 @@ const emitOptionChange = () => {
       font-size: $font-size-mobile-smallest;
     }
   }
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 </style>

@@ -112,6 +112,10 @@ function signUp(e) {
   color: var(--font-color);
 }
 
+.signup-button {
+  cursor: pointer;
+}
+
 h2 {
   text-align: center;
 }

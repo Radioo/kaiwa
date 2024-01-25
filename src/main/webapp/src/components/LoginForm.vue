@@ -43,6 +43,10 @@ function logIn() {
 @use "../scss/abstracts/index" as *;
 @use '../scss/test';
 
+.login-button {
+  cursor: pointer;
+}
+
 .login-form {
     width: 25%;
     margin: 0 auto;

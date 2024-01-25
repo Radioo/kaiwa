@@ -30,6 +30,10 @@ const register = ref(false);
 @use "../scss/abstracts/index" as *;
 @use '../scss/test';
 
+#register-button {
+  cursor: pointer;
+}
+
 p, .account-prompt {
   text-align: center;
 }

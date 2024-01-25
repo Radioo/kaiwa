@@ -34,6 +34,9 @@ function sendMessage() {
 <style lang="scss">
 @use "../scss/abstracts/index" as *;
 
+.send-button {
+  cursor: pointer;
+}
 
 .input-container{
   width: 60%;
