@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 public class Message {
@@ -39,6 +40,7 @@ public class Message {
 
     public String getParsedDate() {
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         return sdf.format(date);
     }
