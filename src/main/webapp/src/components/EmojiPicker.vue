@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import emojiList from 'unicode-emoji-json/data-ordered-emoji.json';
 
 const popupOpen = ref(false);
+
+const emojiButton = ref(null);
+const emojiPickerPopup = ref(null);
 
 const emit = defineEmits(["emojiPicked"]);
 
@@ -11,12 +14,32 @@ function emojiPicked(e) {
     emit("emojiPicked", emoji);
 }
 
+function closePopupOnPageClick(e) {
+    // close popup window if clicked elsewhere
+    if (
+        popupOpen.value === true
+     && e.target !== emojiButton.value
+     && e.target !== emojiPickerPopup.value
+     && !emojiPickerPopup.value?.contains(e.target)
+    ) {
+        popupOpen.value = false;
+    }
+}
+
+onMounted(() => {
+    document.addEventListener("click", closePopupOnPageClick);
+});
+
+onBeforeUnmount(() => {
+    document.removeEventListener("click", closePopupOnPageClick);
+});
+
 </script>
 
 <template>
     <div class="rel btn">
-        <button @click="popupOpen = !popupOpen">Emoji</button>
-        <div class="popup" :class="{open: popupOpen}" >
+        <button @click="popupOpen = !popupOpen" ref="emojiButton">Emoji</button>
+        <div class="popup" v-if="popupOpen" ref="emojiPickerPopup">
             <div
                 class="emoji-btn"
                 tabindex="0"
@@ -59,7 +82,7 @@ function emojiPicked(e) {
     background-color: var(--chat);
     color: white;
     padding: 0.5em;
-    display: none ;
+    display: grid;
     position: absolute;
     top: calc(0px - (var(--popup-height) + var(--popup-button-gap)));
     right: 0px;
@@ -82,13 +105,11 @@ function emojiPicked(e) {
     margin: 4px;
     border-radius: 8px;
     cursor: pointer;
+
+    user-select: none;
 }
 
 .emoji-btn:hover {
     background-color: var(--chat-message);
-}
-
-.open {
-    display: grid;
 }
 </style>
