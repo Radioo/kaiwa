@@ -74,7 +74,8 @@ public class RoutingController {
                 newMessage.getId(),
                 newMessage.getUser().getName(),
                 newMessage.getText(),
-                newMessage.getParsedDate()
+                newMessage.getParsedDate(),
+                newMessage.getTimestamp()
         ));
 
         return ResponseEntity.ok().build();
@@ -90,7 +91,8 @@ public class RoutingController {
                         message.getId(),
                         message.getUser().getName(),
                         message.getText(),
-                        message.getParsedDate()
+                        message.getParsedDate(),
+                        message.getTimestamp()
                 ))
                 .collect(Collectors.toList());
     }

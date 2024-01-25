@@ -44,4 +44,8 @@ public class Message {
 
         return sdf.format(date);
     }
+
+    public long getTimestamp() {
+        return date.getTime();
+    }
 }

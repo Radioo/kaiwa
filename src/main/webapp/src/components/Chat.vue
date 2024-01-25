@@ -68,7 +68,7 @@ onMounted(() => {
         messagesJson[i].text = transformWord(messagesJson[i].text, i)
         if (isCensored == "T")
           messagesJson[i].text = swearFilter(messagesJson[i].text)
-        messagesJson[i].date = transformDate(messagesJson[i].date)
+        messagesJson[i].dateParsed = transformDate(messagesJson[i].date)
         messages.value.push(messagesJson[i])
       }
     })
@@ -103,7 +103,6 @@ onMounted(() => {
     message.text = transformWord(message.text, messages.value.length)
     if (isCensored == "T")
       message.text = swearFilter(message.text)
-    message.date = transformDate(message.date)
 
     console.log('SSEMessage', message);
 
@@ -118,6 +117,14 @@ onMounted(() => {
       if(isNotified && message.user != username.value)
         notify(message.user, message.text);
     }
+
+    if(messages.value.length > 50) {
+      messages.value.shift();
+    }
+
+    messages.value.map(msg => {
+      msg.dateParsed = transformDate(msg.date)
+    })
   };
 
   fetch("/username")

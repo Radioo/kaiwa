@@ -4,7 +4,7 @@
       <b>{{ props.messageBody.user }}</b>
     </div>
     <div id="message-message" :class="props.animationClass">{{ props.messageBody.text }}</div>
-    <div id="message-timestamp" :class="props.animationClass">{{ props.messageBody.date }}</div>
+    <div id="message-timestamp" :class="props.animationClass">{{ props.messageBody.dateParsed }}</div>
   </div>
 </template>
 
