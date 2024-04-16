@@ -31,17 +31,13 @@ public class RoutingController {
     }
 
     @GetMapping("/")
-    public String showIndexPage(Model model) {
-        model.addAttribute("route", "");
-
-        return "index";
+    public ResponseEntity<Void> showIndexPage(Model model) {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/chat")
-    public String showChatPage(Model model) {
-        model.addAttribute("route", "chat");
-
-        return "index";
+    public ResponseEntity<Void> showChatPage() {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/username")
